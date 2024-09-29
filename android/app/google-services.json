@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "831145182536",
+    "project_id": "agrocaf-bcfaf",
+    "storage_bucket": "agrocaf-bcfaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831145182536:android:14cfac52f993a4f304df7d",
+        "android_client_info": {
+          "package_name": "com.example.agrocaf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvrKsD4bpUTKYSBPDn2HvoDMa-IfMci24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
