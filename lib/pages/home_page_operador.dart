@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        backgroundColor: Color.fromRGBO(76, 140, 43, 1),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -40,7 +40,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: _pages[_selectedIndex], // Mostrar la página seleccionada
+      body: _pages[_selectedIndex],
+      backgroundColor:
+          Color.fromRGBO(244, 246, 255, 1), // Mostrar la página seleccionada
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -75,8 +77,104 @@ class _HomePageState extends State<HomePage> {
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Página 3'),
+    return Column(
+      children: [
+        info(),
+        Column(
+          children: [
+            Container(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                padding: EdgeInsets.all(16),
+                margin: EdgeInsets.all(20),
+                child: Row(children: [
+                  Column(children: [Text('Ingrese la pesada'), Text('Peso')]),
+                ])),
+            Container(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                padding: EdgeInsets.all(16),
+                margin: EdgeInsets.all(20),
+                child: Row(children: [
+                  Column(children: [
+                    Text('Seleccione el recolector'),
+                  ]),
+                ])),
+          ],
+        )
+      ],
     );
   }
+}
+
+class info extends StatelessWidget {
+  const info({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color.fromRGBO(76, 140, 43, 1),
+      padding: EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.asset(
+                  'images/agrocaf_logo.png',
+                  height: 150.0,
+                  width: 150.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(16.0),
+                child: Text('Agrocaf\nOperador',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: Color.fromRGBO(255, 255, 255, 0.965),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                        )),
+              ),
+              Expanded(
+                  child: Container(
+                padding: EdgeInsets.all(90),
+              )),
+            ],
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5.0),
+            child: Container(
+              color: Color.fromRGBO(252, 252, 252, 1),
+              padding: EdgeInsets.symmetric(horizontal: 170, vertical: 8),
+              //margin: EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  Text('Valor del Kilo --------'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _buildTextField(
+    BuildContext context, String hintText, TextEditingController controller,
+    {bool obscureText = false}) {
+  return TextField(
+    controller: controller,
+    obscureText: obscureText,
+    decoration: InputDecoration(
+      labelText: hintText,
+      filled: true,
+      fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+  );
 }
