@@ -16,18 +16,39 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFFF),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 50),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  'images/agrocaf_logo.png',
+                  height: 150.0,
+                  width: 150.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
               Text(
-                'Login',
+                'Inicio de\nSesión',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Color.fromRGBO(76, 140, 43, 10),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 50,
                     ),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                'Inicie sesión para continuar',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Color.fromRGBO(143, 142, 142, 1),
+                      fontSize: 14,
+                    ),
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 40),
               _buildTextField(context, 'Email', _emailController),
@@ -71,7 +92,7 @@ class LoginPage extends StatelessWidget {
         filled: true,
         fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
@@ -87,6 +108,15 @@ class LoginPage extends StatelessWidget {
           _authController.login(
               email, password); // Llamar al método de login en el controlador
         },
+        style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all(Size(500, 50)),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  10), // Cambia el valor para ajustar el radio de los bordes
+            ),
+          ),
+        ),
         child: Text(
           'Iniciar Sesión',
           style: TextStyle(fontSize: 18),
