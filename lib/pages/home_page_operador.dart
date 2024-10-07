@@ -1,6 +1,7 @@
 /*import 'package:auth_2024/pages/page1.dart';
 import 'package:auth_2024/pages/page2.dart';
 import 'package:auth_2024/pages/page4.dart';*/
+import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
@@ -76,6 +77,8 @@ class _HomePageState extends State<HomePage> {
 
 class Page1 extends StatelessWidget {
   @override
+  final RecolectorController _recolectorController = RecolectorController();
+  final TextEditingController _searchController = TextEditingController();
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -92,13 +95,111 @@ class Page1 extends StatelessWidget {
             Container(
                 color: Color.fromRGBO(255, 255, 255, 1),
                 padding: EdgeInsets.all(16),
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Row(children: [
                   Column(children: [
                     Text('Seleccione el recolector'),
                   ]),
                 ])),
           ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              labelText: 'Buscar por nombre',
+              suffixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(),
+            ),
+            onChanged: (value) {
+              _recolectorController.updateSearchQuery(
+                  value); // Actualizar la búsqueda en el controlador
+            },
+          ),
+        ),
+        Expanded(
+          child: Obx(() {
+            if (_recolectorController.filteredRecolectores.isEmpty) {
+              return Center(child: Text('No se encontraron ítems.'));
+            }
+
+            return GridView.builder(
+              padding: const EdgeInsets.all(8.0),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                //childAspectRatio: 0.75,
+                // Ajustar el tamaño de las tarjetas
+              ),
+              itemCount: _recolectorController.filteredRecolectores.length,
+              itemBuilder: (context, index) {
+                final recolector =
+                    _recolectorController.filteredRecolectores[index];
+
+                return Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                        ),
+                      ),
+
+                      // Detalles del ítem
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          recolector.cedula,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }),
+        ),
+        Plus(),
+      ],
+    );
+  }
+}
+
+class Plus extends StatelessWidget {
+  const Plus({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: Container(
+            margin: EdgeInsets.only(right: 20),
+            color: Color.fromRGBO(252, 252, 252, 1),
+            child: Icon(
+              Icons.add,
+              size: 40,
+              color: Color.fromRGBO(76, 140, 43, 1),
+            ),
+          ),
         )
       ],
     );

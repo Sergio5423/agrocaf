@@ -32,6 +32,9 @@ dependencies:
     sdk: flutter
   firebase_core:
   get_storage:
+  firebase_storage:
+  uuid:
+  get:
 
 
   # The following adds the Cupertino Icons font to your application.
