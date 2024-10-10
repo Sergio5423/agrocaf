@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:agrocaf/models/recolector.dart';
+import 'package:agrocaf/models/recolector_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -77,6 +77,7 @@ class RecolectorController extends GetxController {
     _recolectorService.getRecolectores().listen((fetchedRecolectores) {
       recolectores.value = fetchedRecolectores;
       applyFilter(); // Aplicar filtro cada vez que se actualicen los ítems
+      print('Fetched recolectores: ${recolectores.length}'); // Comprobar datos
       isLoading.value = false;
     });
   }

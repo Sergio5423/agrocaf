@@ -17,8 +17,8 @@ class Recolector {
   });
 
   // Método para convertir un documento de Firestore en una instancia de Item
-  factory Recolector.fromMap(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+  factory Recolector.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data() as Map;
     return Recolector(
       cedula: data['cedula'] ?? '',
       nombre: data['nombre'] ?? '',
@@ -29,7 +29,7 @@ class Recolector {
   }
 
   // Método para convertir un objeto Item a Map (para guardar en Firestore)
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toFirestore() {
     return {
       'cedula': cedula,
       'nombre': nombre,

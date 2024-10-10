@@ -1,4 +1,4 @@
-import 'package:agrocaf/models/recolector.dart';
+import 'package:agrocaf/models/recolector_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecolectorService {
@@ -7,7 +7,8 @@ class RecolectorService {
   // Método para obtener todos los ítems de Firestore
   Stream<List<Recolector>> getRecolectores() {
     return _firestore.collection('recolectores').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) => Recolector.fromMap(doc)).toList();
+      print(snapshot.docs.length);
+      return snapshot.docs.map((doc) => Recolector.fromFirestore(doc)).toList();
     });
   }
 
@@ -17,7 +18,7 @@ class RecolectorService {
       await _firestore
           .collection('recolectores')
           .doc(recolector.cedula)
-          .set(recolector.toMap());
+          .set(recolector.toFirestore());
     } catch (e) {
       print('Error al guardar recolector en Firestore: $e');
     }
@@ -29,7 +30,7 @@ class RecolectorService {
       await _firestore
           .collection('recolectores')
           .doc(recolector.cedula)
-          .update(recolector.toMap());
+          .update(recolector.toFirestore());
     } catch (e) {
       print('Error al actualizar el recolector en Firestore: $e');
     }
@@ -52,7 +53,7 @@ class RecolectorService {
           .doc(recolectorCedula)
           .get();
       if (doc.exists) {
-        return Recolector.fromMap(doc);
+        return Recolector.fromFirestore(doc);
       } else {
         print('El recolector no existe.');
         return null;
