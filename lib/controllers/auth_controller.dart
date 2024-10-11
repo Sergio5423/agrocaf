@@ -1,4 +1,4 @@
-import 'package:agrocaf/pages/home_page_operador.dart';
+import 'package:agrocaf/pages/operador/home_operador.dart';
 import 'package:agrocaf/pages/login_page.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
