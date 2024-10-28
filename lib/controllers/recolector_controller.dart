@@ -1,8 +1,8 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:agrocaf/models/recolector_model.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
+// import 'package:uuid/uuid.dart';
 import '../services/recolector_service.dart';
 
 class RecolectorController extends GetxController {
