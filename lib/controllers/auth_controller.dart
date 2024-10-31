@@ -1,5 +1,5 @@
-import 'package:agrocaf/pages/operador/home_operador.dart';
-import 'package:agrocaf/pages/login_page.dart';
+import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
+import 'package:agrocaf/pages/Login/login_operador.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart'; // Importar GetStorage
@@ -28,7 +28,7 @@ class AuthController extends GetxController {
       if (newUser != null) {
         user.value = newUser; // Usuario registrado exitosamente
         await _saveCredentials(email, password); // Guardar credenciales
-        Get.offAll(() => HomePage()); // Redirigir a la vista principal
+        Get.offAll(() => HomeOperador()); // Redirigir a la vista principal
       } else {
         Get.snackbar("Error", "No se pudo registrar el usuario");
       }
@@ -48,7 +48,7 @@ class AuthController extends GetxController {
       if (loggedInUser != null) {
         user.value = loggedInUser; // Usuario inició sesión exitosamente
         await _saveCredentials(email, password); // Guardar credenciales
-        Get.offAll(() => HomePage()); // Redirigir a la vista principal
+        Get.offAll(() => HomeOperador()); // Redirigir a la vista principal
       } else {
         Get.snackbar("Error", "No se pudo iniciar sesión");
       }
@@ -65,7 +65,7 @@ class AuthController extends GetxController {
     await _clearCredentials(); // Eliminar credenciales guardadas
     user.value = null; // Usuario ha cerrado sesión
     Get.snackbar("Sesión cerrada", "Hasta pronto");
-    Get.offAll(() => LoginPage()); // Redirigir a la vista de login
+    Get.offAll(() => LoginOperador()); // Redirigir a la vista de login
   }
 
   // Guardar las credenciales de usuario usando GetStorage

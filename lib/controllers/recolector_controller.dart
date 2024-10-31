@@ -1,9 +1,11 @@
-// import 'dart:io';
+import 'dart:io'; // Para manejar archivos
 import 'package:agrocaf/models/recolector_model.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:agrocaf/services/recolector_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:uuid/uuid.dart';
-import '../services/recolector_service.dart';
+import 'package:path_provider/path_provider.dart'; // Para obtener el directorio del archivo
+import 'package:excel/excel.dart'; // Para crear archivos Excel
 
 class RecolectorController extends GetxController {
   final RecolectorService _recolectorService = RecolectorService();
@@ -73,14 +75,24 @@ class RecolectorController extends GetxController {
 
   // Método para cargar todos los ítems
   void fetchRecolectores() async {
-    isLoading.value = true;
+    while (isLoading.value) {
+      isLoading.value = true;
+    }
+
     _recolectorService.getRecolectores().listen((fetchedRecolectores) {
       recolectores.value = fetchedRecolectores;
-      applyFilter(); // Aplicar filtro cada vez que se actualicen los ítems
+
+      // Usar addPostFrameCallback para evitar el error
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        applyFilter(); // Aplicar filtro después de la construcción
+      });
+
       print('Fetched recolectores: ${recolectores.length}'); // Comprobar datos
       isLoading.value = false;
     });
   }
+
+  var selectedPaymentMethod = ''.obs;
 
   // Método para aplicar el filtro basado en el texto de búsqueda
   void applyFilter() {
@@ -111,5 +123,57 @@ class RecolectorController extends GetxController {
       Get.snackbar('Error', 'Ocurrió un error al obtener el ítem');
       return null;
     }
+  }
+
+  //Metodo para actualizar datos del recolector por su cedula
+  Future<void> updateRecolectorField(
+      String recolectorCedula, String field, dynamic newValue) async {
+    try {
+      // Referencia al recolector basado en la cédula
+      var recolectorDoc = FirebaseFirestore.instance
+          .collection('recolectores')
+          .doc(recolectorCedula);
+
+      // Actualizar el campo específico
+      await recolectorDoc.update({field: newValue});
+    } catch (e) {
+      throw Exception('Error al actualizar el recolector: $e');
+    }
+  }
+
+  // Método para generar el archivo Excel
+  Future<void> generateExcel() async {
+    var excel = Excel.createExcel(); // Crear un nuevo libro de Excel
+    Sheet sheet = excel['Sheet1'];
+
+    // Agregar encabezados
+    sheet.appendRow([
+      'Cédula',
+      'Nombre del Recolector',
+      'Teléfono',
+      'Método de Pago',
+      'Número de Cuenta'
+    ]);
+
+    // Agregar datos de recolectores
+    for (var recolector in recolectores) {
+      sheet.appendRow([
+        recolector.cedula,
+        recolector.nombre,
+        recolector.telefono,
+        recolector.metodopago,
+        recolector.ncuenta
+      ]);
+    }
+
+    // Guardar el archivo
+    final directory = await getApplicationDocumentsDirectory();
+    final String filePath = '${directory.path}/recolectores.xlsx';
+    File(filePath)
+      ..createSync(recursive: true)
+      ..writeAsBytesSync(excel.encode()!);
+
+    Get.snackbar('Éxito',
+        'Archivo Excel generado en: $filePath'); // Mostrar un mensaje de éxito
   }
 }
