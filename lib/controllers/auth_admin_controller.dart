@@ -1,11 +1,11 @@
-import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
-import 'package:agrocaf/pages/Login/login_operador.dart';
+import 'package:agrocaf/pages/Apartados_admin/Home_Administrador.dart';
+import 'package:agrocaf/pages/Login/login_admin.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart'; // Importar GetStorage
 import '../services/auth_service.dart';
 
-class AuthController extends GetxController {
+class AuthAdminController extends GetxController {
   final FirebaseService _firebaseService = FirebaseService();
   var isLoading = false.obs; // Observa si se está cargando una operación
   Rxn<User> user = Rxn<User>();
@@ -19,18 +19,18 @@ class AuthController extends GetxController {
     _autoLogin(); // Intentar login automático al iniciar
   }
 
-  // Método para registrar el usuario y guardar datos en Firestore
+  // Método para registrar el administrador y guardar datos en Firestore
   Future<void> register(String email, String password, String name) async {
     try {
       isLoading.value = true;
       User? newUser =
           await _firebaseService.registerWithEmail(email, password, name);
       if (newUser != null) {
-        user.value = newUser; // Usuario registrado exitosamente
+        user.value = newUser; // Administrador registrado exitosamente
         await _saveCredentials(email, password); // Guardar credenciales
-        Get.offAll(() => HomeOperador()); // Redirigir a la vista principal
+        Get.offAll(() => HomeAdmin()); // Redirigir a la vista principal
       } else {
-        Get.snackbar("Error", "No se pudo registrar el usuario");
+        Get.snackbar("Error", "No se pudo registrar el administrador");
       }
     } catch (e) {
       Get.snackbar("Error", "Ocurrió un error durante el registro");
@@ -46,9 +46,9 @@ class AuthController extends GetxController {
       User? loggedInUser =
           await _firebaseService.loginWithEmail(email, password);
       if (loggedInUser != null) {
-        user.value = loggedInUser; // Usuario inició sesión exitosamente
+        user.value = loggedInUser; // Administrador inició sesión exitosamente
         await _saveCredentials(email, password); // Guardar credenciales
-        Get.offAll(() => HomeOperador()); // Redirigir a la vista principal
+        Get.offAll(() => HomeAdmin()); // Redirigir a la vista principal
       } else {
         Get.snackbar("Error", "No se pudo iniciar sesión");
       }
@@ -63,12 +63,12 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     await _firebaseService.signOut();
     await _clearCredentials(); // Eliminar credenciales guardadas
-    user.value = null; // Usuario ha cerrado sesión
+    user.value = null; // Administrador ha cerrado sesión
     Get.snackbar("Sesión cerrada", "Hasta pronto");
-    Get.offAll(() => LoginOperador()); // Redirigir a la vista de login
+    Get.offAll(() => LoginAdmin()); // Redirigir a la vista de login
   }
 
-  // Guardar las credenciales de usuario usando GetStorage
+  // Guardar las credenciales de administrador usando GetStorage
   Future<void> _saveCredentials(String email, String password) async {
     storage.write('email', email);
     storage.write('password', password);

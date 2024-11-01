@@ -1,14 +1,15 @@
+import 'package:agrocaf/controllers/auth_admin_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/auth_controller.dart';
 
-class RegisterPage extends StatelessWidget {
-  final AuthController _authController = Get.put(AuthController());
+class RegisterAdminPage extends StatelessWidget {
+  final AuthAdminController _authController =
+      Get.put(AuthAdminController()); // Cambiado a AuthAdminController
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  RegisterPage({super.key});
+  RegisterAdminPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,12 @@ class RegisterPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
               const SizedBox(height: 50),
               Text(
                 'Registro',

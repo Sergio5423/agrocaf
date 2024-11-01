@@ -6,7 +6,7 @@ import 'package:agrocaf/pages/Apartados_Operador/Registro_Pesada.dart';
 import 'package:agrocaf/widgets/BottomNavigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/auth_controller.dart';
+import '../../controllers/auth_operador_controller.dart';
 
 class HomeOperador extends StatefulWidget {
   const HomeOperador({super.key});
@@ -16,7 +16,7 @@ class HomeOperador extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomeOperador> {
-  final AuthController _authController =
+  final AuthOperadorController _authController =
       Get.find(); // Obtener el controlador de autenticación
   final RecolectorController _recolectorController =
       Get.put(RecolectorController()); // Inyectar RecolectorController
