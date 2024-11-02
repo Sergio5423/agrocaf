@@ -1,6 +1,6 @@
 import 'package:agrocaf/pages/Configuracion/Configuracion.dart';
-import 'package:agrocaf/pages/Pagos/Pagos.dart';
-import 'package:agrocaf/pages/Temporadas/Temporadas.dart';
+import 'package:agrocaf/pages/Apartados_admin/Pagos/Pagos.dart';
+import 'package:agrocaf/pages/Apartados_admin/Temporadas/Temporadas.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

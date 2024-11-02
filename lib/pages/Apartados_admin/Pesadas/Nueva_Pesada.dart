@@ -1,6 +1,6 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
 
-import 'package:agrocaf/widgets/BottomNavigator.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 
 class AddPesadas extends StatelessWidget {

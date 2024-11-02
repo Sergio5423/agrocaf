@@ -1,6 +1,6 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/pages/Apartados_admin/Recolectores/Agregar_Recolector.dart';
-import 'package:agrocaf/widgets/BottomNavigator.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
 
 import 'package:agrocaf/widgets/Tablas/Datos_recolector.dart';
 

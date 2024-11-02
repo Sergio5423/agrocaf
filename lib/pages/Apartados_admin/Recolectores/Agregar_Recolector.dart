@@ -1,5 +1,5 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNavigator.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';

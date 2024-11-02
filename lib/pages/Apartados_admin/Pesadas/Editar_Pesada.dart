@@ -1,11 +1,11 @@
-import 'package:agrocaf/models/pesadas_model.dart';
-import 'package:agrocaf/widgets/BottomNavigator.dart'; // Widget para la barra de navegación
+/*import 'package:agrocaf/models/pesadas_model.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart'; // Widget para la barra de navegación
 import 'package:flutter/material.dart';
 
 class EditPezadaPage extends StatelessWidget {
-  final Pezada pezada;
+  final Pesada pesada;
 
-  EditPezadaPage({super.key, required this.pezada});
+  EditPesadaPage({super.key, required this.pesada});
 
   final TextEditingController idController = TextEditingController();
   final TextEditingController pesoController = TextEditingController();
@@ -117,3 +117,4 @@ class EditPezadaPage extends StatelessWidget {
     );
   }
 }
+*/

@@ -1,3 +1,4 @@
+import 'package:agrocaf/pages/Login/login_opciones.dart';
 import 'package:agrocaf/pages/Login/register/register_operador_page.dart';
 import 'package:agrocaf/widgets/login.dart';
 import 'package:agrocaf/controllers/auth_operador_controller.dart';
@@ -17,7 +18,10 @@ class LoginOperador extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Regresar a la ventana anterior
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginOpciones()),
+            );
           },
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/pages/Apartados_admin/Pesadas/Nueva_Pesada.dart';
 
-import 'package:agrocaf/widgets/BottomNavigator.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
 import 'package:agrocaf/widgets/Tablas/Datos_Tablapezadas.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

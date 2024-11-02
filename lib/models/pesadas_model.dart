@@ -1,39 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Pezada {
-  final String id;
-  final double peso;
-  final String calidad;
+class Pesada {
+  String? id;
+  final String cedRecolector;
+  final String peso;
   final DateTime fecha;
-  final String recolectorCedula; // Asociación con el recolector
 
-  Pezada({
-    required this.id,
+  Pesada({
+    this.id,
+    required this.cedRecolector,
     required this.peso,
-    required this.calidad,
     required this.fecha,
-    required this.recolectorCedula,
   });
 
-  // Convertir los datos de Firestore a una instancia de Pezada
-  factory Pezada.fromFirestore(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Pezada(
+  static Pesada fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Pesada(
       id: doc.id,
+      cedRecolector: data['cedRecolector'],
       peso: data['peso'],
-      calidad: data['calidad'],
       fecha: (data['fecha'] as Timestamp).toDate(),
-      recolectorCedula: data['recolectorCedula'],
     );
   }
 
-  // Convertir una instancia de Pezada a un formato que se pueda guardar en Firestore
   Map<String, dynamic> toFirestore() {
     return {
+      'cedRecolector': cedRecolector,
       'peso': peso,
-      'calidad': calidad,
       'fecha': fecha,
-      'recolectorCedula': recolectorCedula,
     };
   }
 }

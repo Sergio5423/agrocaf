@@ -23,8 +23,8 @@ class AuthOperadorController extends GetxController {
   Future<void> register(String email, String password, String name) async {
     try {
       isLoading.value = true;
-      User? newUser =
-          await _firebaseService.registerWithEmail(email, password, name);
+      User? newUser = await _firebaseService.registerWithEmail(
+          email, password, name, 'usuarios');
       if (newUser != null) {
         user.value = newUser; // Usuario registrado exitosamente
         await _saveCredentials(email, password); // Guardar credenciales

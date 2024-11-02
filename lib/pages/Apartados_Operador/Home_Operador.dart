@@ -1,9 +1,7 @@
-/*import 'package:auth_2024/pages/page1.dart';
-import 'package:auth_2024/pages/page2.dart';
-import 'package:auth_2024/pages/page4.dart';*/
+import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Registro_Pesada.dart';
-import 'package:agrocaf/widgets/BottomNavigator.dart';
+import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth_operador_controller.dart';
@@ -20,6 +18,7 @@ class _HomePageState extends State<HomeOperador> {
       Get.find(); // Obtener el controlador de autenticación
   final RecolectorController _recolectorController =
       Get.put(RecolectorController()); // Inyectar RecolectorController
+  final PesadaController _pesadaController = Get.put(PesadaController());
   final int _selectedIndex = 0;
 
   final List<Widget> _pages = [
@@ -37,7 +36,6 @@ class _HomePageState extends State<HomeOperador> {
               icon: Container(
                 child: const Row(
                   children: [
-                    Text('Salir'),
                     SizedBox(
                       width: 8,
                     ),

@@ -26,24 +26,27 @@ class _InfoState extends State<Info> {
       scrollDirection: Axis.vertical,
       child: Container(
         color: const Color.fromRGBO(76, 140, 43, 1),
-        padding: const EdgeInsets.only(bottom: 16.0, left: 1, right: 4),
+        padding: const EdgeInsets.only(bottom: 16.0, left: 10, right: 10),
         child: Column(
           children: [
             Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.asset(
-                    'images/agrocaf_logo.png',
-                    height: 120,
-                    width: 120,
-                    fit: BoxFit.cover,
+                Container(
+                  padding: EdgeInsets.only(left: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.asset(
+                      'images/agrocaf_logo.png',
+                      height: 120,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    'Agrocaf\n ${widget.cargo}',
+                    'Agrocaf\n${widget.cargo}',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: const Color.fromRGBO(255, 255, 255, 0.965),
                           fontWeight: FontWeight.bold,
@@ -52,6 +55,9 @@ class _InfoState extends State<Info> {
                   ),
                 ),
               ],
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),

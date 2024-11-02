@@ -1,3 +1,53 @@
+import 'package:get/get.dart';
+import 'package:agrocaf/models/pesadas_model.dart';
+import 'package:agrocaf/services/pesadas_service.dart';
+
+class PesadaController extends GetxController {
+  final PesadaService _pesadaService = PesadaService();
+  var pesadas = <Pesada>[].obs;
+  var isLoading = false.obs;
+  var _selectedRecolector = ''.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    /*fetchPesadas();*/
+  }
+
+  /*void fetchPesadas() {
+    try {
+      isLoading.value = true;
+      _pesadaService.getPesadas().listen((pesadaList) {
+        pesadas.assignAll(pesadaList);
+        isLoading.value = false;
+      });
+    } catch (e) {
+      print('Error al cargar pesadas: $e');
+      isLoading.value = false;
+    }
+  }*/
+
+  Future<void> savePesada(Pesada pesada) async {
+    try {
+      isLoading.value = true;
+      await _pesadaService.savePesada(pesada);
+      /* fetchPesadas();*/
+    } catch (e) {
+      print('Error al guardar la pesada: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void updateSelectedRecolector(String recolector) {
+    _selectedRecolector.value = recolector;
+  }
+
+  String get selectedRecolector => _selectedRecolector.value;
+}
+
+
+
 /* import 'dart:io'; // Para manejar archivos
 import 'package:agrocaf/models/pezadas_model.dart';
 import 'package:agrocaf/services/pezadas_service.dart';
