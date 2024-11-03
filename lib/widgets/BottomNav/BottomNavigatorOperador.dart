@@ -1,16 +1,20 @@
-import 'package:agrocaf/pages/Apartados_admin/Home_Administrador.dart';
 import 'package:agrocaf/pages/Configuracion/Configuracion.dart';
-//import 'package:agrocaf/pages/Apartados_Operador/Principal/Principal.dart';
+import 'package:agrocaf/pages/Apartados_Operador/Principal/Principal.dart';
 //import 'package:agrocaf/pages/Apartados_Operador/Temporadas/Temporadas.dart';
+import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
 import 'package:agrocaf/pages/Reportes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BottomNaviAdmin extends StatelessWidget {
-  const BottomNaviAdmin({super.key});
+class BottomNaviOperador extends StatelessWidget {
+  const BottomNaviOperador({super.key});
 
-  void _HomeAdmin(BuildContext context) {
-    Get.to(const HomeAdmin());
+  void _HomeOperador(BuildContext context) {
+    Get.to(HomeOperador());
+  }
+
+  void _Principal(BuildContext context) {
+    Get.to(const Principal());
   }
 
   void _Configuracion(BuildContext context) {
@@ -30,28 +34,28 @@ class BottomNaviAdmin extends StatelessWidget {
       backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
       onTap: (int index) {
         switch (index) {
-          /*case 0:
-            _HomeAdmin(context);
-            break;*/
           case 0:
-            _HomeAdmin(context);
+            _HomeOperador(context);
+            break;
+          case 1:
+            _Principal(context);
             break;
           /*case 2:
             _Temporada(context);
             break;*/
-          case 1:
+          case 2:
             _Reportes(context);
             break;
-          case 2:
+          case 3:
             _Configuracion(context);
             break;
         }
       },
       items: [
-        /*BottomNavigationBarItem(
+        BottomNavigationBarItem(
           icon: Icon(Icons.scale),
           label: 'Nueva Pesada',
-        ),*/
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.house_outlined),
           label: 'Principal',

@@ -1,6 +1,6 @@
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,7 +18,7 @@ class _add_AbonosState extends State<add_Abonos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(

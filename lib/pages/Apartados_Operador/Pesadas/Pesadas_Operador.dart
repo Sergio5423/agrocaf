@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
-import 'package:agrocaf/widgets/Logout.dart';
+import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class Pesadas extends StatelessWidget {
+class PesadasOperador extends StatelessWidget {
   final PesadaController pesadaController = Get.put(PesadaController());
 
-  Pesadas({super.key});
+  PesadasOperador({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class Pesadas extends StatelessWidget {
           color: Colors.white,
         ),
       ),*/
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
         actions: [
-          Logout(),
+          LogoutOperador(),
         ],
       ),
       body: SingleChildScrollView(
@@ -66,31 +66,34 @@ class Pesadas extends StatelessWidget {
                             title: Text(item.cedRecolector),
                             subtitle: Text(item.peso),
                             onTap: () {
-                              showModalBottomSheet(
+                              showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Container(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text('Detalles de Pesada',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(height: 10),
-                                        Text(
-                                            'Recolector: ${item.cedRecolector}'),
-                                        Text('Peso: ${item.peso} kg'),
-                                        Text('Fecha: ${item.fecha.toString()}'),
-                                        SizedBox(height: 20),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('Cerrar'),
-                                        ),
-                                      ],
+                                  return AlertDialog(
+                                    title: Text(
+                                      'Detalles de Pesada',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                              'Recolector: ${item.cedRecolector}'),
+                                          Text('Peso: ${item.peso} kg'),
+                                          Text(
+                                              'Fecha: ${item.fecha.toString()}'),
+                                          SizedBox(height: 20),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Cerrar'),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -202,9 +205,7 @@ class Pesadas extends StatelessWidget {
                 String cedRecolector = _cedRecolectorController.text.trim();
                 String peso = _pesoController.text.trim();
                 DateTime fecha = DateTime.parse(_fechaController.text.trim());
-                if (cedRecolector.isNotEmpty &&
-                    peso.isNotEmpty &&
-                    fecha != null) {
+                if (cedRecolector.isNotEmpty && peso.isNotEmpty) {
                   Pesada updatedPesada = Pesada(
                     id: pesada.id,
                     cedRecolector: cedRecolector,

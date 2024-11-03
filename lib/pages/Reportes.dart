@@ -2,23 +2,23 @@ import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 
-class Admin_Kilo extends StatefulWidget {
-  const Admin_Kilo({super.key});
+class Reportes extends StatefulWidget {
+  const Reportes({super.key});
 
   @override
-  State<Admin_Kilo> createState() => _Admin_KiloState();
+  State<Reportes> createState() => _Admin_ReportesState();
 }
 
-class _Admin_KiloState extends State<Admin_Kilo> {
+class _Admin_ReportesState extends State<Reportes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNaviOperador(),
-      appBar: AppBar(title: const Text('Pesadas')),
+      appBar: AppBar(title: const Text('Reportes')),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
-          children: [Info(Texto: 'Kilo', cargo: 'Admin')],
+          children: [Info(Texto: 'Reportes', cargo: '')],
         )),
       ),
     );

@@ -1,20 +1,23 @@
 import 'dart:async';
 
 import 'package:agrocaf/models/recolector_model.dart';
-import 'package:agrocaf/widgets/Logout.dart';
-import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+//import 'package:agrocaf/widgets/LogoutOperador.dart';
+import 'package:agrocaf/widgets/informacion/info.dart';
+//import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/recolector_controller.dart';
+import '../../../controllers/recolector_controller.dart';
 
-class Recolectores extends StatelessWidget {
+/*Pestaña con los datos del recolector*/
+class RecolectoresAdmin extends StatelessWidget {
   final RecolectorController recolectorController =
       Get.put(RecolectorController());
-  Recolectores({super.key});
+  RecolectoresAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
+    recolectorController.fetchRecolectores();
     return Scaffold(
       floatingActionButton: Stack(
         children: [
@@ -43,12 +46,10 @@ class Recolectores extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviAdmin(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
-        actions: [
-          Logout(),
-        ],
+        actions: [],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -57,7 +58,7 @@ class Recolectores extends StatelessWidget {
             height: 800,
             child: Column(
               children: [
-                Info(Texto: 'Recolectores', cargo: 'Operador'),
+                Info(Texto: 'Recolectores', cargo: 'Admin'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -83,7 +84,38 @@ class Recolectores extends StatelessWidget {
                         return ListTile(
                           title: Text(item.nombre),
                           subtitle: Text(item.cedula),
-                          onTap: () {},
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Detalles del Recolector'),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text('Cédula: ${item.cedula}'),
+                                        Text('Nombre: ${item.nombre}'),
+                                        Text('Teléfono: ${item.telefono}'),
+                                        Text(
+                                            'Método de Pago: ${item.metodopago}'),
+                                        Text(
+                                            'Número de Cuenta: ${item.ncuenta}'),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cerrar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[

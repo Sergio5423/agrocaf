@@ -1,5 +1,5 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:agrocaf/widgets/Tablas/Datos_Lotes.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class _Admin_LotesState extends State<Admin_Lotes> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       appBar: AppBar(title: const Text('Lotes')),
       body: SingleChildScrollView(
         child: SafeArea(

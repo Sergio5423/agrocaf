@@ -1,8 +1,8 @@
 import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Registro_Pesada.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
-import 'package:agrocaf/widgets/Logout.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
+import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth_operador_controller.dart';
@@ -25,11 +25,11 @@ class _HomePageState extends State<HomeOperador> {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
           actions: [
-            Logout(),
+            LogoutOperador(),
           ],
         ),
         body: RegistroPesadaOperador(),
-        bottomNavigationBar: BottomNavi());
+        bottomNavigationBar: BottomNaviOperador());
   }
 }
 

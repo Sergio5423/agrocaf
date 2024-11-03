@@ -1,7 +1,7 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/pages/Apartados_admin/Abonos/Nuevo_Abono.dart';
 
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:agrocaf/widgets/Tablas/Datos.Abonos.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +28,7 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       appBar: AppBar(title: const Text('Abonos')),
       body: SingleChildScrollView(
         child: SafeArea(

@@ -1,5 +1,5 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 
 class Temporadas extends StatefulWidget {
@@ -13,7 +13,7 @@ class _nameState extends State<Temporadas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       appBar: AppBar(
         title: const Text('Temporada'),
       ),

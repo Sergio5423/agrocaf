@@ -1,8 +1,8 @@
 import 'package:agrocaf/controllers/pesadas_controller.dart';
-import 'package:agrocaf/widgets/Logout.dart';
+import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/widgets/Botones_Pagos.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -20,11 +20,11 @@ class _PagosState extends State<Principal> {
   Widget build(BuildContext context) {
     pesadaController.fetchPesadas();
     return Scaffold(
-      bottomNavigationBar: BottomNavi(),
+      bottomNavigationBar: BottomNaviOperador(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
         actions: [
-          Logout(),
+          LogoutOperador(),
         ],
       ),
       body: SingleChildScrollView(
@@ -65,13 +65,13 @@ class _PagosState extends State<Principal> {
                                       .center, // Opcional: centrar el contenido en el Row
                                   children: [
                                     Container_Button_PagoState(
-                                        ruta: '/apartado_recolector',
+                                        ruta: '/recolectores_operador',
                                         imagen: 'images/Reco.png',
                                         texto: 'Recolectores'),
                                     SizedBox(width: 16),
                                     // Espacio de 16 píxeles entre el primer y el segundo botón
                                     Container_Button_PagoState(
-                                        ruta: '/apartado_pesadas',
+                                        ruta: '/pesadas_operador',
                                         imagen: 'images/Pesa.png',
                                         texto: 'Pesadas'),
                                     SizedBox(
@@ -90,13 +90,6 @@ class _PagosState extends State<Principal> {
                             margin: const EdgeInsets.only(left: 23, top: 20),
                             child: const Row(
                               children: [
-                                Container_Button_PagoState(
-                                    ruta: '/apartado_report',
-                                    imagen: 'images/Report.png',
-                                    texto: 'Reportes'),
-                                SizedBox(
-                                    width:
-                                        16), // Espacio de 16 píxeles entre el segundo y el tercer botón
                                 /*Container_Button_PagoState(
                                     ruta: '/apartado_kilo',
                                     imagen: 'images/kilo.png',
