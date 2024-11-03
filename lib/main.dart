@@ -1,5 +1,5 @@
 import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
-import 'package:agrocaf/pages/Apartados_Operador/Temporadas/Temporadas.dart';
+import 'package:agrocaf/pages/Temporadas/Temporadas.dart';
 import 'package:agrocaf/pages/Apartados_admin/Abonos/Abonos.dart';
 import 'package:agrocaf/pages/Apartados_admin/Kilo/Kilo.dart';
 import 'package:agrocaf/pages/Apartados_admin/Lotes/Lotes.dart';

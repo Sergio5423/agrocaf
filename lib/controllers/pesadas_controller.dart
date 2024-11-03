@@ -8,7 +8,11 @@ class PesadaController extends GetxController {
   var filteredPesadas = <Pesada>[].obs; // Lista observable de ítems filtrados
   var isLoading = false.obs;
   var _selectedRecolector = ''.obs;
+  var _selectedPesada = ''.obs;
 
+  void selectPesada(String id) {
+    _selectedPesada.value = id;
+  }
   /* @override
   void onInit() {
     super.onInit();
@@ -44,6 +48,20 @@ class PesadaController extends GetxController {
     _selectedRecolector.value = recolector;
   }
 
+  Future<void> updateItem(Pesada pesada) async {
+    try {
+      isLoading.value = true;
+
+      await _pesadaService.updatePesada(pesada);
+      Get.snackbar('Éxito', 'Recolector actualizado correctamente');
+      fetchPesadas(); // Volver a cargar los ítems después de actualizar
+    } catch (e) {
+      Get.snackbar('Error', 'Ocurrió un error al actualizar el ítem');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   // Método para eliminar un ítem
   Future<void> deletePesada(String pesadaId) async {
     try {
@@ -59,6 +77,7 @@ class PesadaController extends GetxController {
   }
 
   String get selectedRecolector => _selectedRecolector.value;
+  String get selectedPesada => _selectedPesada.value;
 }
 
 

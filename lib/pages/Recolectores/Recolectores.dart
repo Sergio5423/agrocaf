@@ -23,8 +23,9 @@ class Recolectores extends StatelessWidget {
             right: 2,
             child: FloatingActionButton(
               onPressed: () async {
+                Recolector recolectorVacio = Recolector();
                 Recolector? recolector = await _showAddRecolectorDialog(
-                    context, recolectorController, 'Nuevo');
+                    context, recolectorController, 'Nuevo', recolectorVacio);
 
                 if (recolector != null) {
                   recolectorController.saveNewRecolector(recolector);
@@ -90,8 +91,11 @@ class Recolectores extends StatelessWidget {
                                 icon: Icon(Icons.edit),
                                 onPressed: () async {
                                   Recolector? recolector =
-                                      await _showAddRecolectorDialog(context,
-                                          recolectorController, 'Actualizar');
+                                      await _showAddRecolectorDialog(
+                                          context,
+                                          recolectorController,
+                                          'Actualizar',
+                                          item);
                                   recolectorController
                                       .selectRecolector(item.cedula);
                                   String cedula =
@@ -152,13 +156,21 @@ class Recolectores extends StatelessWidget {
     );
   }
 
-  Future<Recolector?> _showAddRecolectorDialog(BuildContext context,
-      RecolectorController recolectorController, String titulo) {
-    final TextEditingController cedulaController = TextEditingController();
-    final TextEditingController nombreController = TextEditingController();
-    final TextEditingController telefonoController = TextEditingController();
-    final TextEditingController metodoPagoController = TextEditingController();
-    final TextEditingController cuentaController = TextEditingController();
+  Future<Recolector?> _showAddRecolectorDialog(
+      BuildContext context,
+      RecolectorController recolectorController,
+      String titulo,
+      Recolector recolector) {
+    final TextEditingController cedulaController =
+        TextEditingController(text: recolector.cedula);
+    final TextEditingController nombreController =
+        TextEditingController(text: recolector.nombre);
+    final TextEditingController telefonoController =
+        TextEditingController(text: recolector.telefono);
+    final TextEditingController metodoPagoController =
+        TextEditingController(text: recolector.metodopago);
+    final TextEditingController cuentaController =
+        TextEditingController(text: recolector.ncuenta);
     Completer<Recolector?> completer = Completer();
     showDialog(
       context: context,

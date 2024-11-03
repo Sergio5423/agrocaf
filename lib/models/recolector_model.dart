@@ -9,11 +9,11 @@ class Recolector {
 
   // Constructor
   Recolector({
-    required this.cedula,
-    required this.nombre,
-    required this.telefono,
-    required this.metodopago,
-    required this.ncuenta,
+    this.cedula = '',
+    this.nombre = '',
+    this.telefono = '',
+    this.metodopago = '',
+    this.ncuenta = '',
   });
 
   // Método para convertir un documento de Firestore en una instancia de Item

@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
+import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/Logout.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
@@ -8,13 +10,14 @@ import 'package:get/get_core/src/get_main.dart';
 
 class Pesadas extends StatelessWidget {
   final PesadaController pesadaController = Get.put(PesadaController());
+
   Pesadas({super.key});
 
   @override
   Widget build(BuildContext context) {
     pesadaController.fetchPesadas();
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Get.to(AddPesadas());
         },
@@ -23,7 +26,7 @@ class Pesadas extends StatelessWidget {
           Icons.add,
           color: Colors.white,
         ),
-      ),
+      ),*/
       bottomNavigationBar: BottomNavi(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
@@ -41,7 +44,7 @@ class Pesadas extends StatelessWidget {
               child: TextField(
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                  labelText: 'Buscar Por Id Pesadas',
+                  labelText: 'Buscar por cédula de recolector',
                   border: OutlineInputBorder(),
                 ),
                 onChanged: (value) {},
@@ -93,6 +96,35 @@ class Pesadas extends StatelessWidget {
                                 },
                               );
                             },
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () async {
+                                    //print(item.id);
+                                    Pesada? pesada = await _showAddPesadaDialog(
+                                        context,
+                                        pesadaController,
+                                        'Actualizar',
+                                        item);
+                                    if (pesada != null) {
+                                      pesadaController.updateItem(pesada);
+                                      Get.snackbar('Éxito',
+                                          'Recolector actualizado correctamente');
+                                    } else {
+                                      Get.snackbar('Error',
+                                          'No se actualizó el recolector');
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete_forever),
+                                  onPressed: () => pesadaController
+                                      .deletePesada(item.id.toString()),
+                                ),
+                              ],
+                            ),
                           );
                         },
                       ),
@@ -105,5 +137,93 @@ class Pesadas extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  Future<Pesada?> _showAddPesadaDialog(BuildContext context,
+      PesadaController pesadaController, String titulo, Pesada pesada) {
+    final TextEditingController _cedRecolectorController =
+        TextEditingController(text: pesada.cedRecolector);
+    final TextEditingController _fechaController =
+        TextEditingController(text: pesada.fecha.toString());
+    final TextEditingController _pesoController =
+        TextEditingController(text: pesada.peso);
+
+    Completer<Pesada?> completer = Completer();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(titulo),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _cedRecolectorController,
+                  decoration: const InputDecoration(labelText: 'Cédula'),
+                ),
+                TextFormField(
+                  controller: _fechaController,
+                  decoration: InputDecoration(
+                    labelText: 'Fecha',
+                  ),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101),
+                    );
+                    if (pickedDate != null) {
+                      String formattedDate =
+                          "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                      _fechaController.text = formattedDate;
+                    }
+                  },
+                ),
+                TextField(
+                  controller: _pesoController,
+                  decoration: const InputDecoration(labelText: 'Peso'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                completer.complete(null);
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                String cedRecolector = _cedRecolectorController.text.trim();
+                String peso = _pesoController.text.trim();
+                DateTime fecha = DateTime.parse(_fechaController.text.trim());
+                if (cedRecolector.isNotEmpty &&
+                    peso.isNotEmpty &&
+                    fecha != null) {
+                  Pesada updatedPesada = Pesada(
+                    id: pesada.id,
+                    cedRecolector: cedRecolector,
+                    peso: peso,
+                    fecha: fecha,
+                  );
+                  Navigator.of(context).pop();
+                  completer.complete(updatedPesada);
+                } else {
+                  Get.snackbar(
+                      'Error', 'Por favor, complete todos los campos.');
+                }
+              },
+              child: Text(titulo),
+            ),
+          ],
+        );
+      },
+    );
+    return completer.future;
   }
 }
