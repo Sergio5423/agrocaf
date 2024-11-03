@@ -1,9 +1,10 @@
 import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
+import 'package:agrocaf/pages/Apartados_Operador/Temporadas/Temporadas.dart';
 import 'package:agrocaf/pages/Apartados_admin/Abonos/Abonos.dart';
 import 'package:agrocaf/pages/Apartados_admin/Kilo/Kilo.dart';
 import 'package:agrocaf/pages/Apartados_admin/Lotes/Lotes.dart';
-import 'package:agrocaf/pages/Apartados_admin/Pesadas/Pesadas.dart';
-import 'package:agrocaf/pages/Apartados_admin/Recolectores/Recolectores.dart';
+import 'package:agrocaf/pages/Pesadas/Pesadas.dart';
+import 'package:agrocaf/pages/Recolectores/Recolectores.dart';
 import 'package:agrocaf/pages/Apartados_admin/Reportes.dart';
 import 'package:agrocaf/firebase_options.dart';
 import 'package:agrocaf/pages/Login/login_opciones.dart';
@@ -21,11 +22,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(agrocaf());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class agrocaf extends StatelessWidget {
+  const agrocaf({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
         GetPage(page: () => const Admin_Abonos(), name: '/apartado_abono'),
         GetPage(page: () => const Admin_Kilo(), name: '/apartado_kilo'),
         GetPage(page: () => const Admin_Lotes(), name: '/apartado_lotes'),
-        GetPage(page: () => const Admin_Pesadas(), name: '/apartado_pesadas'),
-        GetPage(page: () => RecolectoresPage(), name: '/apartado_recole'),
+        GetPage(page: () => Pesadas(), name: '/apartado_pesadas'),
+        GetPage(page: () => Recolectores(), name: '/apartado_recolector'),
         GetPage(page: () => const Admin_Reportes(), name: '/apartado_report'),
+        GetPage(page: () => Temporadas(), name: '/temporadas'),
       ],
     );
   }

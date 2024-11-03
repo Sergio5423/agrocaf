@@ -1,5 +1,5 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 
 class Admin_Kilo extends StatefulWidget {

@@ -16,7 +16,8 @@ class RegistroPesadaOperador extends StatelessWidget {
   Widget build(BuildContext context) {
     final RecolectorController recolectorController =
         Get.find(); // Obtener el controlador de RecolectorController
-    final PesadaController pesadaController = Get.find();
+    final PesadaController pesadaController = Get.put(PesadaController());
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -164,87 +165,4 @@ class RegistroPesadaOperador extends StatelessWidget {
       ),
     );
   }
-
-  /*void _showAddRecolectorDialog(
-      BuildContext context, RecolectorController recolectorController) {
-    final TextEditingController cedulaController = TextEditingController();
-    final TextEditingController nombreController = TextEditingController();
-    final TextEditingController telefonoController = TextEditingController();
-    final TextEditingController metodoPagoController = TextEditingController();
-    final TextEditingController cuentaController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Agregar Recolector'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: cedulaController,
-                  decoration: const InputDecoration(labelText: 'Cédula'),
-                ),
-                TextField(
-                  controller: nombreController,
-                  decoration: const InputDecoration(labelText: 'Nombre'),
-                ),
-                TextField(
-                  controller: telefonoController,
-                  decoration: const InputDecoration(labelText: 'Teléfono'),
-                ),
-                TextField(
-                  controller: metodoPagoController,
-                  decoration:
-                      const InputDecoration(labelText: 'Método de Pago'),
-                ),
-                TextField(
-                  controller: cuentaController,
-                  decoration:
-                      const InputDecoration(labelText: 'Número de Cuenta'),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                String cedula = cedulaController.text.trim();
-                String nombre = nombreController.text.trim();
-                String telefono = telefonoController.text.trim();
-                String metodoPago = metodoPagoController.text.trim();
-                String cuenta = cuentaController.text.trim();
-
-                if (cedula.isNotEmpty &&
-                    nombre.isNotEmpty &&
-                    telefono.isNotEmpty &&
-                    metodoPago.isNotEmpty &&
-                    cuenta.isNotEmpty) {
-                  recolectorController.saveNewRecolector(
-                    cedula,
-                    nombre,
-                    telefono,
-                    metodoPago,
-                    cuenta,
-                  ); // Llama al método de agregar
-                  Navigator.of(context).pop(); // Cerrar el diálogo
-                } else {
-                  Get.snackbar(
-                      'Error', 'Por favor, complete todos los campos.');
-                }
-              },
-              child: const Text('Agregar'),
-            ),
-          ],
-        );
-      },
-    );
-  }*/
 }

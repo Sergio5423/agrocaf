@@ -1,17 +1,17 @@
+import 'dart:async';
+
+import 'package:agrocaf/models/recolector_model.dart';
+import 'package:agrocaf/widgets/Logout.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/pages/Apartados_admin/Recolectores/Agregar_Recolector.dart';
-import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
-
-import 'package:agrocaf/widgets/Tablas/Datos_recolector.dart';
-
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/recolector_controller.dart'; // Asegúrate de importar el controlador
+import '../../controllers/recolector_controller.dart';
 
-class RecolectoresPage extends StatelessWidget {
-  final RecolectorController controller = Get.put(RecolectorController());
-
-  RecolectoresPage({super.key});
+class Recolectores extends StatelessWidget {
+  final RecolectorController recolectorController =
+      Get.put(RecolectorController());
+  Recolectores({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,18 @@ class RecolectoresPage extends StatelessWidget {
             bottom: 20,
             right: 2,
             child: FloatingActionButton(
-              onPressed: () {
-                Get.to(() => AddRecolectorPage());
+              onPressed: () async {
+                Recolector? recolector = await _showAddRecolectorDialog(
+                    context, recolectorController, 'Nuevo');
+
+                if (recolector != null) {
+                  recolectorController.saveNewRecolector(recolector);
+                  Get.snackbar('Éxito', 'Recolector guardado correctamente');
+                } else {
+                  Get.snackbar('Error', 'No se guardó el recolector');
+                }
               },
-              backgroundColor: Colors.green,
+              backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
               child: Icon(
                 Icons.add,
                 color: Colors.white,
@@ -36,8 +44,10 @@ class RecolectoresPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavi(),
       appBar: AppBar(
-        title: const Text('Recolectores'),
-        actions: const [],
+        backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
+        actions: [
+          Logout(),
+        ],
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -46,7 +56,7 @@ class RecolectoresPage extends StatelessWidget {
             height: 800,
             child: Column(
               children: [
-                Info(Texto: 'Recolectores', cargo: 'ADMIN'),
+                Info(Texto: 'Recolectores', cargo: 'Operador'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -56,17 +66,65 @@ class RecolectoresPage extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) {
-                      controller.updateSearchQuery(value);
+                      recolectorController.updateSearchQuery(value);
                     },
                   ),
                 ),
-                Tablarecolectores(),
-                const SizedBox(
+                Obx(() {
+                  return SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount:
+                          recolectorController.filteredRecolectores.length,
+                      itemBuilder: (context, index) {
+                        final item =
+                            recolectorController.filteredRecolectores[index];
+                        return ListTile(
+                          title: Text(item.nombre),
+                          subtitle: Text(item.cedula),
+                          onTap: () {},
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () async {
+                                  Recolector? recolector =
+                                      await _showAddRecolectorDialog(context,
+                                          recolectorController, 'Actualizar');
+                                  recolectorController
+                                      .selectRecolector(item.cedula);
+                                  String cedula =
+                                      recolectorController.selectedCedula.value;
+                                  if (recolector != null) {
+                                    recolectorController.updateItem(
+                                        recolector, cedula);
+                                    Get.snackbar('Éxito',
+                                        'Recolector actualizado correctamente');
+                                  } else {
+                                    Get.snackbar('Error',
+                                        'No se actualizó el recolector');
+                                  }
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.delete_forever),
+                                onPressed: () => recolectorController
+                                    .deleteRecolector(item.cedula),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }),
+                /*const SizedBox(
                   height: 40,
-                ),
+                ),*/
                 ElevatedButton(
                   onPressed: () {
-                    controller
+                    recolectorController
                         .generateExcel(); // Llamar al método para generar el Excel
                   },
                   child: SizedBox(
@@ -94,19 +152,19 @@ class RecolectoresPage extends StatelessWidget {
     );
   }
 
-  void _showAddRecolectorDialog(
-      BuildContext context, RecolectorController recolectorController) {
+  Future<Recolector?> _showAddRecolectorDialog(BuildContext context,
+      RecolectorController recolectorController, String titulo) {
     final TextEditingController cedulaController = TextEditingController();
     final TextEditingController nombreController = TextEditingController();
     final TextEditingController telefonoController = TextEditingController();
     final TextEditingController metodoPagoController = TextEditingController();
     final TextEditingController cuentaController = TextEditingController();
-
+    Completer<Recolector?> completer = Completer();
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Agregar Recolector'),
+          title: Text(titulo),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -140,6 +198,7 @@ class RecolectoresPage extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                completer.complete(null);
               },
               child: const Text('Cancelar'),
             ),
@@ -150,30 +209,31 @@ class RecolectoresPage extends StatelessWidget {
                 String telefono = telefonoController.text.trim();
                 String metodoPago = metodoPagoController.text.trim();
                 String cuenta = cuentaController.text.trim();
-
                 if (cedula.isNotEmpty &&
                     nombre.isNotEmpty &&
                     telefono.isNotEmpty &&
                     metodoPago.isNotEmpty &&
                     cuenta.isNotEmpty) {
-                  recolectorController.saveNewRecolector(
-                    cedula,
-                    nombre,
-                    telefono,
-                    metodoPago,
-                    cuenta,
-                  ); // Llama al método de agregar
-                  Navigator.of(context).pop(); // Cerrar el diálogo
+                  Recolector recolector = Recolector(
+                    cedula: cedula,
+                    nombre: nombre,
+                    telefono: telefono,
+                    metodopago: metodoPago,
+                    ncuenta: cuenta,
+                  );
+                  Navigator.of(context).pop();
+                  completer.complete(recolector);
                 } else {
                   Get.snackbar(
                       'Error', 'Por favor, complete todos los campos.');
                 }
               },
-              child: const Text('Agregar'),
+              child: Text(titulo),
             ),
           ],
         );
       },
     );
+    return completer.future;
   }
 }

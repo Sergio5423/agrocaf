@@ -5,16 +5,17 @@ import 'package:agrocaf/services/pesadas_service.dart';
 class PesadaController extends GetxController {
   final PesadaService _pesadaService = PesadaService();
   var pesadas = <Pesada>[].obs;
+  var filteredPesadas = <Pesada>[].obs; // Lista observable de ítems filtrados
   var isLoading = false.obs;
   var _selectedRecolector = ''.obs;
 
-  @override
+  /* @override
   void onInit() {
     super.onInit();
-    /*fetchPesadas();*/
-  }
+    fetchPesadas();
+  }*/
 
-  /*void fetchPesadas() {
+  void fetchPesadas() {
     try {
       isLoading.value = true;
       _pesadaService.getPesadas().listen((pesadaList) {
@@ -25,7 +26,7 @@ class PesadaController extends GetxController {
       print('Error al cargar pesadas: $e');
       isLoading.value = false;
     }
-  }*/
+  }
 
   Future<void> savePesada(Pesada pesada) async {
     try {
@@ -41,6 +42,20 @@ class PesadaController extends GetxController {
 
   void updateSelectedRecolector(String recolector) {
     _selectedRecolector.value = recolector;
+  }
+
+  // Método para eliminar un ítem
+  Future<void> deletePesada(String pesadaId) async {
+    try {
+      isLoading.value = true;
+      await _pesadaService.deletePesada(pesadaId);
+      Get.snackbar('Éxito', 'Ítem eliminado correctamente');
+      fetchPesadas(); // Volver a cargar los ítems después de eliminar
+    } catch (e) {
+      Get.snackbar('Error', 'Ocurrió un error al eliminar el ítem');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   String get selectedRecolector => _selectedRecolector.value;

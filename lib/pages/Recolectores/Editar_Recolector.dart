@@ -1,7 +1,7 @@
-import 'package:agrocaf/controllers/recolector_controller.dart';
+/*import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/models/recolector_model.dart';
-import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -130,3 +130,4 @@ class EditRecolectorPage extends StatelessWidget {
     );
   }
 }
+*/

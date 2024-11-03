@@ -1,7 +1,6 @@
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
-import 'package:agrocaf/widgets/Tablas/Datos_recolector.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -45,7 +44,7 @@ class _add_AbonosState extends State<add_Abonos> {
                     ),
                   ),
                 ),
-                Tablarecolectores(),
+                //Tablarecolectores(),
                 const Divider(),
                 const SizedBox(height: 20),
                 Container(

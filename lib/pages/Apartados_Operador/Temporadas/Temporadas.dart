@@ -1,15 +1,15 @@
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 
-class Temporada extends StatefulWidget {
-  const Temporada({super.key});
+class Temporadas extends StatefulWidget {
+  const Temporadas({super.key});
 
   @override
-  State<Temporada> createState() => _nameState();
+  State<Temporadas> createState() => _nameState();
 }
 
-class _nameState extends State<Temporada> {
+class _nameState extends State<Temporadas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

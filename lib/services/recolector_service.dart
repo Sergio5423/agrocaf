@@ -1,5 +1,6 @@
 import 'package:agrocaf/models/recolector_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 // Adriana
 class RecolectorService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -25,11 +26,11 @@ class RecolectorService {
   }
 
   // Método para actualizar un ítem existente en Firestore
-  Future<void> updateRecolector(Recolector recolector) async {
+  Future<void> updateRecolector(Recolector recolector, String ced) async {
     try {
       await _firestore
           .collection('recolectores')
-          .doc(recolector.cedula)
+          .doc(ced)
           .update(recolector.toFirestore());
     } catch (e) {
       print('Error al actualizar el recolector en Firestore: $e');

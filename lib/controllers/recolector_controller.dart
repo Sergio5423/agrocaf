@@ -16,21 +16,16 @@ class RecolectorController extends GetxController {
   var filteredRecolectores =
       <Recolector>[].obs; // Lista observable de ítems filtrados
   var searchQuery = ''.obs; // Variable observable para el texto de búsqueda
+  var selectedCedula = ''.obs;
+
+  void selectRecolector(String cedula) {
+    selectedCedula.value = cedula;
+  }
 
   // Método para guardar un nuevo ítem
-  Future<void> saveNewRecolector(String cedula, String nombre, String telefono,
-      String metodopago, String ncuenta) async {
+  Future<void> saveNewRecolector(Recolector recolector) async {
     try {
       isLoading.value = true;
-      //String itemId = Uuid().v4(); // Generar un ID único para el ítem
-
-      // Crear una instancia de Item con todos los datos
-      Recolector recolector = Recolector(
-          cedula: cedula,
-          nombre: nombre,
-          telefono: telefono,
-          metodopago: metodopago,
-          ncuenta: ncuenta);
 
       // Guardar el ítem usando el servicio
       await _recolectorService.saveRecolector(recolector);
@@ -44,12 +39,12 @@ class RecolectorController extends GetxController {
   }
 
   // Método para actualizar un ítem existente
-  Future<void> updateItem(Recolector recolector) async {
+  Future<void> updateItem(Recolector recolector, String ced) async {
     try {
       isLoading.value = true;
 
       // Actualizar los datos del ítem en Firestore
-      await _recolectorService.updateRecolector(recolector);
+      await _recolectorService.updateRecolector(recolector, ced);
       Get.snackbar('Éxito', 'Recolector actualizado correctamente');
       fetchRecolectores(); // Volver a cargar los ítems después de actualizar
     } catch (e) {
