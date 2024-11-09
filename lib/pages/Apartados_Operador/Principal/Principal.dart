@@ -77,10 +77,10 @@ class _PagosState extends State<Principal> {
                                     SizedBox(
                                         width:
                                             16), // Espacio de 16 píxeles entre el segundo y el tercer botón
-                                    Container_Button_PagoState(
+                                    /*Container_Button_PagoState(
                                         ruta: '/apartado_lotes',
                                         imagen: 'images/Lotes.png',
-                                        texto: 'Lotes'),
+                                        texto: 'Lotes'),*/
                                   ],
                                 ),
                               )
@@ -97,15 +97,15 @@ class _PagosState extends State<Principal> {
                                 SizedBox(
                                     width:
                                         13.5),*/
-                                Container_Button_PagoState(
+                                /*Container_Button_PagoState(
                                     ruta: '/apartado_abono',
                                     imagen: 'images/Abonos.png',
                                     texto: 'Abonos'),
-                                SizedBox(width: 16),
-                                Container_Button_PagoState(
+                                SizedBox(width: 16),*/
+                                /*Container_Button_PagoState(
                                     ruta: '/temporadas',
                                     imagen: 'images/calendario.png',
-                                    texto: 'Temporadas'),
+                                    texto: 'Temporadas'),*/
                               ],
                             ),
                           ),

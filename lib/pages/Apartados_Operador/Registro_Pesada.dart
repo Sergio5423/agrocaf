@@ -12,6 +12,8 @@ class RegistroPesadaOperador extends StatelessWidget {
 
   RegistroPesadaOperador({super.key}); // Controlador para la pesada
 
+  int _selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     final RecolectorController recolectorController =

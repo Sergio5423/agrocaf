@@ -43,9 +43,9 @@ class BottomNaviOperador extends StatelessWidget {
           /*case 2:
             _Temporada(context);
             break;*/
-          case 2:
+          /*case 2:
             _Reportes(context);
-            break;
+            break;*/
           case 3:
             _Configuracion(context);
             break;
@@ -64,10 +64,10 @@ class BottomNaviOperador extends StatelessWidget {
           icon: Icon(Icons.calendar_month_outlined),
           label: 'Temporadas',
         ),*/
-        BottomNavigationBarItem(
+        /*BottomNavigationBarItem(
           icon: Icon(Icons.receipt_long_outlined),
           label: 'Reportes',
-        ),
+        ),*/
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Configuración',
