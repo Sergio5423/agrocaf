@@ -109,8 +109,8 @@ class RegistroPesadaOperador extends StatelessWidget {
                         title: Text(item.nombre),
                         subtitle: Text(item.cedula),
                         onTap: () {
-                          pesadaController
-                              .updateSelectedRecolector(item.cedula);
+                          pesadaController.updateSelectedRecolector(item);
+                          Get.snackbar(item.nombre, 'seleccionado');
                         },
                         /*trailing: IconButton(
             icon: Image.asset('images/basura.png'),
@@ -134,12 +134,14 @@ class RegistroPesadaOperador extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () async {
                 if (_pesadaController.text.isNotEmpty) {
-                  String recolector = pesadaController.selectedRecolector;
+                  String cedula = pesadaController.selectedRecolectorCedula;
+                  String nombre = pesadaController.selectedRecolectorNombre;
                   String peso = _pesadaController.text.trim();
                   DateTime fecha = DateTime.now();
 
                   Pesada nuevaPesada = Pesada(
-                    cedRecolector: recolector,
+                    cedula: cedula,
+                    nombre: nombre,
                     peso: peso,
                     fecha: fecha,
                   );

@@ -2,13 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Pesada {
   String? id;
-  final String cedRecolector;
+  final String cedula;
+  final String nombre;
   final String peso;
   final DateTime fecha;
 
   Pesada({
     this.id,
-    required this.cedRecolector,
+    required this.cedula,
+    required this.nombre,
     required this.peso,
     required this.fecha,
   });
@@ -17,7 +19,8 @@ class Pesada {
     final data = doc.data() as Map<String, dynamic>;
     return Pesada(
       id: doc.id,
-      cedRecolector: data['cedRecolector'],
+      cedula: data['cedula'],
+      nombre: data['nomRecolector'],
       peso: data['peso'],
       fecha: (data['fecha'] as Timestamp).toDate(),
     );
@@ -25,7 +28,8 @@ class Pesada {
 
   Map<String, dynamic> toFirestore() {
     return {
-      'cedRecolector': cedRecolector,
+      'cedula': cedula,
+      'nomRecolector': nombre,
       'peso': peso,
       'fecha': fecha,
     };

@@ -134,9 +134,10 @@ class _PagosState extends State<Principal> {
                             itemCount: pesadaController.pesadas.length,
                             itemBuilder: (context, index) {
                               final item = pesadaController.pesadas[index];
+                              print(item);
                               return ListTile(
-                                title: Text(item.cedRecolector),
-                                subtitle: Text(item.fecha.toString()),
+                                title: Text('Peso: ${item.peso} kg'),
+                                subtitle: Text('Nombre: ${item.nombre}'),
                                 onTap: () {
                                   showModalBottomSheet(
                                     context: context,
@@ -152,8 +153,7 @@ class _PagosState extends State<Principal> {
                                                     fontWeight:
                                                         FontWeight.bold)),
                                             SizedBox(height: 10),
-                                            Text(
-                                                'Recolector: ${item.cedRecolector}'),
+                                            Text('Recolector: ${item.cedula}'),
                                             Text('Peso: ${item.peso} kg'),
                                             Text(
                                                 'Fecha: ${item.fecha.toString()}'),

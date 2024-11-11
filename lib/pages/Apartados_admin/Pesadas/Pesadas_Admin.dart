@@ -63,7 +63,7 @@ class PesadasAdmin extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final item = pesadaController.pesadas[index];
                           return ListTile(
-                            title: Text(item.cedRecolector),
+                            title: Text(item.nombre),
                             subtitle: Text(item.peso),
                             onTap: () {
                               showDialog(
@@ -80,8 +80,7 @@ class PesadasAdmin extends StatelessWidget {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(
-                                              'Recolector: ${item.cedRecolector}'),
+                                          Text('Recolector: ${item.nombre}'),
                                           Text('Peso: ${item.peso} kg'),
                                           Text(
                                               'Fecha: ${item.fecha.toString()}'),
@@ -145,7 +144,9 @@ class PesadasAdmin extends StatelessWidget {
   Future<Pesada?> _showAddPesadaDialog(BuildContext context,
       PesadaController pesadaController, String titulo, Pesada pesada) {
     final TextEditingController _cedRecolectorController =
-        TextEditingController(text: pesada.cedRecolector);
+        TextEditingController(text: pesada.cedula);
+    final TextEditingController _nomRecolectorController =
+        TextEditingController(text: pesada.nombre);
     final TextEditingController _fechaController =
         TextEditingController(text: pesada.fecha.toString());
     final TextEditingController _pesoController =
@@ -203,12 +204,14 @@ class PesadasAdmin extends StatelessWidget {
             TextButton(
               onPressed: () {
                 String cedRecolector = _cedRecolectorController.text.trim();
+                String nomRecolector = _nomRecolectorController.text.trim();
                 String peso = _pesoController.text.trim();
                 DateTime fecha = DateTime.parse(_fechaController.text.trim());
                 if (cedRecolector.isNotEmpty && peso.isNotEmpty) {
                   Pesada updatedPesada = Pesada(
                     id: pesada.id,
-                    cedRecolector: cedRecolector,
+                    nombre: nomRecolector,
+                    cedula: cedRecolector,
                     peso: peso,
                     fecha: fecha,
                   );

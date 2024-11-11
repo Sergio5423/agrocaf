@@ -142,7 +142,7 @@ class _PagosState extends State<HomeAdmin> {
                             itemBuilder: (context, index) {
                               final item = pesadaController.pesadas[index];
                               return ListTile(
-                                title: Text(item.cedRecolector),
+                                title: Text(item.nombre),
                                 subtitle: Text(item.fecha.toString()),
                                 onTap: () {
                                   showModalBottomSheet(
@@ -159,8 +159,7 @@ class _PagosState extends State<HomeAdmin> {
                                                     fontWeight:
                                                         FontWeight.bold)),
                                             SizedBox(height: 10),
-                                            Text(
-                                                'Recolector: ${item.cedRecolector}'),
+                                            Text('Recolector: ${item.nombre}'),
                                             Text('Peso: ${item.peso} kg'),
                                             Text(
                                                 'Fecha: ${item.fecha.toString()}'),

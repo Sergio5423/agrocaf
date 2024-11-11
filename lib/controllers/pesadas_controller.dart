@@ -7,7 +7,8 @@ class PesadaController extends GetxController {
   var pesadas = <Pesada>[].obs;
   var filteredPesadas = <Pesada>[].obs; // Lista observable de ítems filtrados
   var isLoading = false.obs;
-  var _selectedRecolector = ''.obs;
+  var _selectedRecolectorNombre = ''.obs;
+  var _selectedRecolectorCedula = ''.obs;
   var _selectedPesada = ''.obs;
 
   void selectPesada(String id) {
@@ -25,6 +26,7 @@ class PesadaController extends GetxController {
       _pesadaService.getPesadas().listen((pesadaList) {
         pesadas.assignAll(pesadaList);
         isLoading.value = false;
+        print('Fetched pesadas: ${pesadas.length}');
       });
     } catch (e) {
       print('Error al cargar pesadas: $e');
@@ -44,8 +46,9 @@ class PesadaController extends GetxController {
     }
   }
 
-  void updateSelectedRecolector(String recolector) {
-    _selectedRecolector.value = recolector;
+  void updateSelectedRecolector(recolector) {
+    _selectedRecolectorNombre.value = recolector.nombre;
+    _selectedRecolectorCedula.value = recolector.cedula;
   }
 
   Future<void> updateItem(Pesada pesada) async {
@@ -76,7 +79,8 @@ class PesadaController extends GetxController {
     }
   }
 
-  String get selectedRecolector => _selectedRecolector.value;
+  String get selectedRecolectorNombre => _selectedRecolectorNombre.value;
+  String get selectedRecolectorCedula => _selectedRecolectorCedula.value;
   String get selectedPesada => _selectedPesada.value;
 }
 
