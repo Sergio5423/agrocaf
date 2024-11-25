@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart'; // Para obtener el directorio del archivo
 import 'package:excel/excel.dart'; // Para crear archivos Excel
+import 'package:external_path/external_path.dart';
 
 class RecolectorController extends GetxController {
   final RecolectorService _recolectorService = RecolectorService();
@@ -139,18 +140,14 @@ class RecolectorController extends GetxController {
   // Método para generar el archivo Excel
   Future<void> generateExcel() async {
     var excel = Excel.createExcel(); // Crear un nuevo libro de Excel
-    Sheet sheet = excel['Sheet1'];
-
-    // Agregar encabezados
+    Sheet sheet = excel['Sheet1']; // Agregar encabezados
     sheet.appendRow([
       'Cédula',
       'Nombre del Recolector',
       'Teléfono',
       'Método de Pago',
       'Número de Cuenta'
-    ]);
-
-    // Agregar datos de recolectores
+    ]); // Agregar datos de recolectores
     for (var recolector in recolectores) {
       sheet.appendRow([
         recolector.cedula,
@@ -159,16 +156,14 @@ class RecolectorController extends GetxController {
         recolector.metodopago,
         recolector.ncuenta
       ]);
-    }
-
-    // Guardar el archivo
-    final directory = await getApplicationDocumentsDirectory();
+    } // Guardar el archivo en el directorio de descargas
+    final directory = Directory(
+        '/storage/emulated/0/Download'); // Ruta del directorio de descargas en Android
     final String filePath = '${directory.path}/recolectores.xlsx';
     File(filePath)
       ..createSync(recursive: true)
       ..writeAsBytesSync(excel.encode()!);
-
-    Get.snackbar('Éxito',
-        'Archivo Excel generado en: $filePath'); // Mostrar un mensaje de éxito
+    Get.snackbar('Éxito', 'Archivo Excel generado en: $filePath');
+    // Mostrar un mensaje de éxito }
   }
 }

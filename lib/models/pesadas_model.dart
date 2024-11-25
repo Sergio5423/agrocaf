@@ -6,6 +6,7 @@ class Pesada {
   final String nombre;
   final String peso;
   final DateTime fecha;
+  //final String lote;
 
   Pesada({
     this.id,
@@ -13,6 +14,7 @@ class Pesada {
     required this.nombre,
     required this.peso,
     required this.fecha,
+    //required this.lote,
   });
 
   static Pesada fromFirestore(DocumentSnapshot doc) {
@@ -23,6 +25,7 @@ class Pesada {
       nombre: data['nomRecolector'],
       peso: data['peso'],
       fecha: (data['fecha'] as Timestamp).toDate(),
+      //lote: data['lote'],
     );
   }
 
@@ -32,6 +35,7 @@ class Pesada {
       'nomRecolector': nombre,
       'peso': peso,
       'fecha': fecha,
+      //'lote': lote,
     };
   }
 }

@@ -34,7 +34,7 @@ class _PagosState extends State<Principal> {
           children: [
             Info(
               cargo: 'Operador',
-              Texto: 'Valor del kilo \$-------',
+              Texto: '',
             ),
             const SizedBox(
               height: 15,

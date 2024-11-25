@@ -34,7 +34,7 @@ class _PagosState extends State<HomeAdmin> {
           children: [
             Info(
               cargo: 'Admin',
-              Texto: 'Valor del kilo \$-------',
+              Texto: '',
             ),
             const SizedBox(
               height: 15,
@@ -78,7 +78,7 @@ class _PagosState extends State<HomeAdmin> {
                                         width:
                                             16), // Espacio de 16 píxeles entre el segundo y el tercer botón
                                     Container_Button_PagoState(
-                                        ruta: '/apartado_lotes',
+                                        ruta: '/lotesAdmin',
                                         imagen: 'images/Lotes.png',
                                         texto: 'Lotes'),
                                   ],
@@ -142,8 +142,8 @@ class _PagosState extends State<HomeAdmin> {
                             itemBuilder: (context, index) {
                               final item = pesadaController.pesadas[index];
                               return ListTile(
-                                title: Text(item.nombre),
-                                subtitle: Text(item.fecha.toString()),
+                                title: Text('Peso: ${item.peso} kg'),
+                                subtitle: Text('Nombre: ${item.nombre}'),
                                 onTap: () {
                                   showModalBottomSheet(
                                     context: context,
@@ -160,6 +160,7 @@ class _PagosState extends State<HomeAdmin> {
                                                         FontWeight.bold)),
                                             SizedBox(height: 10),
                                             Text('Recolector: ${item.nombre}'),
+                                            Text('Cédula: ${item.cedula}'),
                                             Text('Peso: ${item.peso} kg'),
                                             Text(
                                                 'Fecha: ${item.fecha.toString()}'),

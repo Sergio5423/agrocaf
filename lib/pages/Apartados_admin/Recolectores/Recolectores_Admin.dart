@@ -8,12 +8,20 @@ import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/recolector_controller.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 /*Pestaña con los datos del recolector*/
 class RecolectoresAdmin extends StatelessWidget {
   final RecolectorController recolectorController =
       Get.put(RecolectorController());
   RecolectoresAdmin({super.key});
+
+  Future<void> requestPermissions() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

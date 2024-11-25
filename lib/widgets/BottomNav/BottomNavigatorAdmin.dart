@@ -42,9 +42,9 @@ class BottomNaviAdmin extends StatelessWidget {
           case 1:
             _Reportes(context);
             break;
-          case 2:
+          /*case 2:
             _Configuracion(context);
-            break;
+            break;*/
         }
       },
       items: [
@@ -64,10 +64,10 @@ class BottomNaviAdmin extends StatelessWidget {
           icon: Icon(Icons.receipt_long_outlined),
           label: 'Reportes',
         ),
-        BottomNavigationBarItem(
+        /*BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Configuración',
-        ),
+        ),*/
       ],
 
       showUnselectedLabels:

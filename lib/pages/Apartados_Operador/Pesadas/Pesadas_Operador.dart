@@ -151,6 +151,8 @@ class PesadasOperador extends StatelessWidget {
         TextEditingController(text: pesada.fecha.toString());
     final TextEditingController _pesoController =
         TextEditingController(text: pesada.peso);
+    /*final TextEditingController _loteController =
+        TextEditingController(text: pesada.lote);*/
 
     Completer<Pesada?> completer = Completer();
     showDialog(
@@ -207,6 +209,7 @@ class PesadasOperador extends StatelessWidget {
                 String nomRecolector = _nomRecolectorController.text.trim();
                 String peso = _pesoController.text.trim();
                 DateTime fecha = DateTime.parse(_fechaController.text.trim());
+                //String lote = _loteController.text.trim();
                 if (cedRecolector.isNotEmpty && peso.isNotEmpty) {
                   Pesada updatedPesada = Pesada(
                     id: pesada.id,
@@ -214,6 +217,7 @@ class PesadasOperador extends StatelessWidget {
                     cedula: cedRecolector,
                     peso: peso,
                     fecha: fecha,
+                    //lote: lote,
                   );
                   Navigator.of(context).pop();
                   completer.complete(updatedPesada);

@@ -1,8 +1,9 @@
 import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
 import 'package:agrocaf/pages/Apartados_admin/Home_Administrador.dart';
+import 'package:agrocaf/pages/Apartados_admin/Lotes/Lotes.dart';
 import 'package:agrocaf/pages/Apartados_admin/Pesadas/Pesadas_Admin.dart';
 import 'package:agrocaf/pages/Apartados_admin/Recolectores/Recolectores_Admin.dart';
-import 'package:agrocaf/pages/Temporadas/Temporadas.dart';
+import 'package:agrocaf/pages/Apartados_admin/Temporadas/Temporadas.dart';
 import 'package:agrocaf/pages/Apartados_admin/Abonos/Abonos.dart';
 import 'package:agrocaf/pages/Apartados_admin/Kilo/Kilo.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Lotes/Lotes_Operador.dart';
@@ -56,6 +57,7 @@ class agrocaf extends StatelessWidget {
         //GetPage(page: () => const Lotes_Operador(), name: '/lotes_operador'),
         GetPage(page: () => PesadasOperador(), name: '/pesadas_operador'),
         GetPage(page: () => PesadasAdmin(), name: '/pesadas_admin'),
+        GetPage(page: () => LotesAdmin(), name: '/lotesAdmin'),
         GetPage(
             page: () => RecolectoresOperador(), name: '/recolectores_operador'),
         GetPage(page: () => RecolectoresAdmin(), name: '/recolectores_admin'),

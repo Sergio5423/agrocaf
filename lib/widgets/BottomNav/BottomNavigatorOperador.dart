@@ -46,9 +46,9 @@ class BottomNaviOperador extends StatelessWidget {
           /*case 2:
             _Reportes(context);
             break;*/
-          case 3:
+          /*case 3:
             _Configuracion(context);
-            break;
+            break;*/
         }
       },
       items: [
@@ -68,10 +68,10 @@ class BottomNaviOperador extends StatelessWidget {
           icon: Icon(Icons.receipt_long_outlined),
           label: 'Reportes',
         ),*/
-        BottomNavigationBarItem(
+        /*BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Configuración',
-        ),
+        ),*/
       ],
 
       showUnselectedLabels:

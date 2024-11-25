@@ -44,21 +44,4 @@ class PesadaService {
       print('Error al eliminar la pesada en Firestore: $e');
     }
   }
-
-  // Método para obtener una pesada por su ID desde Firestore
-  /*Future<Pesada?> getPesada(String pesadaId) async {
-    try {
-      DocumentSnapshot doc =
-          await _firestore.collection('pesadas').doc(pesadaId).get();
-      if (doc.exists) {
-        return Pesada.fromFirestore(doc);
-      } else {
-        print('La pesada no existe.');
-        return null;
-      }
-    } catch (e) {
-      print('Error al obtener la pesada de Firestore: $e');
-      return null;
-    }
-  }*/
 }

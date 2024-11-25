@@ -81,6 +81,7 @@ class PesadasAdmin extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text('Recolector: ${item.nombre}'),
+                                          Text('Cédula: ${item.cedula}'),
                                           Text('Peso: ${item.peso} kg'),
                                           Text(
                                               'Fecha: ${item.fecha.toString()}'),
@@ -131,10 +132,32 @@ class PesadasAdmin extends StatelessWidget {
                         },
                       ),
                     );
-                  })
+                  }),
                 ],
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                pesadaController
+                    .generateExcel(); // Llamar al método para generar el Excel
+              },
+              child: SizedBox(
+                width: 180,
+                child: Row(
+                  children: [
+                    const Icon(Icons.file_download),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    const Text('Descargar Excel'),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Image.asset('images/excel.png')
+                  ],
+                ),
+              ),
+            )
           ],
         )),
       ),
@@ -151,6 +174,8 @@ class PesadasAdmin extends StatelessWidget {
         TextEditingController(text: pesada.fecha.toString());
     final TextEditingController _pesoController =
         TextEditingController(text: pesada.peso);
+    /*final TextEditingController _loteController =
+        TextEditingController(text: pesada.lote);*/
 
     Completer<Pesada?> completer = Completer();
     showDialog(
@@ -207,6 +232,7 @@ class PesadasAdmin extends StatelessWidget {
                 String nomRecolector = _nomRecolectorController.text.trim();
                 String peso = _pesoController.text.trim();
                 DateTime fecha = DateTime.parse(_fechaController.text.trim());
+                //String lote = _loteController.text.trim();
                 if (cedRecolector.isNotEmpty && peso.isNotEmpty) {
                   Pesada updatedPesada = Pesada(
                     id: pesada.id,
@@ -214,6 +240,7 @@ class PesadasAdmin extends StatelessWidget {
                     cedula: cedRecolector,
                     peso: peso,
                     fecha: fecha,
+                    //lote: lote,
                   );
                   Navigator.of(context).pop();
                   completer.complete(updatedPesada);
