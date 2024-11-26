@@ -1,11 +1,9 @@
-import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Registro_Pesada.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/auth_operador_controller.dart';
 
 class HomeOperador extends StatefulWidget {
   const HomeOperador({super.key});

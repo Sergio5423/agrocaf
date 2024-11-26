@@ -2,7 +2,6 @@ import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
-import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 
 class Temporadas extends StatefulWidget {

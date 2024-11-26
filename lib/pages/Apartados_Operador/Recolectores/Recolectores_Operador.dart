@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:agrocaf/models/recolector_model.dart';
-import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';

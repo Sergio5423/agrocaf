@@ -6,7 +6,6 @@ import 'package:agrocaf/pages/Apartados_admin/Recolectores/Recolectores_Admin.da
 import 'package:agrocaf/pages/Apartados_admin/Temporadas/Temporadas.dart';
 import 'package:agrocaf/pages/Apartados_admin/Abonos/Abonos.dart';
 import 'package:agrocaf/pages/Apartados_admin/Kilo/Kilo.dart';
-import 'package:agrocaf/pages/Apartados_Operador/Lotes/Lotes_Operador.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Pesadas/Pesadas_Operador.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Recolectores/Recolectores_Operador.dart';
 import 'package:agrocaf/pages/Reportes.dart';

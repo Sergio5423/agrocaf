@@ -1,18 +1,16 @@
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
-import 'package:agrocaf/services/pesadas_service.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class RegistroPesadaOperador extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _pesadaController = TextEditingController();
 
   RegistroPesadaOperador({super.key}); // Controlador para la pesada
-
-  int _selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
