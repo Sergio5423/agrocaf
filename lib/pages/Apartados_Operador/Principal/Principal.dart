@@ -77,37 +77,10 @@ class _PagosState extends State<Principal> {
                                     SizedBox(
                                         width:
                                             16), // Espacio de 16 píxeles entre el segundo y el tercer botón
-                                    /*Container_Button_PagoState(
-                                        ruta: '/apartado_lotes',
-                                        imagen: 'images/Lotes.png',
-                                        texto: 'Lotes'),*/
                                   ],
                                 ),
                               )
                             ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 23, top: 20),
-                            child: const Row(
-                              children: [
-                                /*Container_Button_PagoState(
-                                    ruta: '/apartado_kilo',
-                                    imagen: 'images/kilo.png',
-                                    texto: 'Kilo'),
-                                SizedBox(
-                                    width:
-                                        13.5),*/
-                                /*Container_Button_PagoState(
-                                    ruta: '/apartado_abono',
-                                    imagen: 'images/Abonos.png',
-                                    texto: 'Abonos'),
-                                SizedBox(width: 16),*/
-                                /*Container_Button_PagoState(
-                                    ruta: '/temporadas',
-                                    imagen: 'images/calendario.png',
-                                    texto: 'Temporadas'),*/
-                              ],
-                            ),
                           ),
                         ],
                       ),
@@ -135,41 +108,46 @@ class _PagosState extends State<Principal> {
                             itemBuilder: (context, index) {
                               final item = pesadaController.pesadas[index];
                               print(item);
-                              return ListTile(
-                                title: Text('Peso: ${item.peso} kg'),
-                                subtitle: Text('Nombre: ${item.nombre}'),
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Container(
-                                        padding: EdgeInsets.all(16.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text('Detalles de Pesada',
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            SizedBox(height: 10),
-                                            Text('Recolector: ${item.cedula}'),
-                                            Text('Peso: ${item.peso} kg'),
-                                            Text(
-                                                'Fecha: ${item.fecha.toString()}'),
-                                            SizedBox(height: 20),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Cerrar'),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
+                              return Card(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 5.0, horizontal: 10.0),
+                                child: ListTile(
+                                  title: Text('Peso: ${item.peso} kg'),
+                                  subtitle: Text('Nombre: ${item.nombre}'),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          padding: EdgeInsets.all(16.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text('Detalles de Pesada',
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                  'Recolector: ${item.cedula}'),
+                                              Text('Peso: ${item.peso} kg'),
+                                              Text(
+                                                  'Fecha: ${item.fecha.toString()}'),
+                                              SizedBox(height: 20),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text('Cerrar'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               );
                             },
                           ),

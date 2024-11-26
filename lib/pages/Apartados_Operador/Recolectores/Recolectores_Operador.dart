@@ -77,105 +77,84 @@ class RecolectoresOperador extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item =
                             recolectorController.filteredRecolectores[index];
-                        return ListTile(
-                          title: Text(item.nombre),
-                          subtitle: Text(item.cedula),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Detalles del Recolector'),
-                                  content: SingleChildScrollView(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text('Cédula: ${item.cedula}'),
-                                        Text('Nombre: ${item.nombre}'),
-                                        Text('Teléfono: ${item.telefono}'),
-                                        Text(
-                                            'Método de Pago: ${item.metodopago}'),
-                                        Text(
-                                            'Número de Cuenta: ${item.ncuenta}'),
-                                      ],
+                        return Card(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 5.0, horizontal: 10.0),
+                          child: ListTile(
+                            title: Text(item.nombre),
+                            subtitle: Text(item.cedula),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Detalles del Recolector'),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text('Cédula: ${item.cedula}'),
+                                          Text('Nombre: ${item.nombre}'),
+                                          Text('Teléfono: ${item.telefono}'),
+                                          Text(
+                                              'Método de Pago: ${item.metodopago}'),
+                                          Text(
+                                              'Número de Cuenta: ${item.ncuenta}'),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cerrar'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () async {
-                                  Recolector? recolector =
-                                      await _showAddRecolectorDialog(
-                                          context,
-                                          recolectorController,
-                                          'Actualizar',
-                                          item);
-                                  recolectorController
-                                      .selectRecolector(item.cedula);
-                                  String cedula =
-                                      recolectorController.selectedCedula.value;
-                                  if (recolector != null) {
-                                    recolectorController.updateItem(
-                                        recolector, cedula);
-                                    Get.snackbar('Éxito',
-                                        'Recolector actualizado correctamente');
-                                  } else {
-                                    Get.snackbar('Error',
-                                        'No se actualizó el recolector');
-                                  }
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cerrar'),
+                                      ),
+                                    ],
+                                  );
                                 },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete_forever),
-                                onPressed: () => recolectorController
-                                    .deleteRecolector(item.cedula),
-                              ),
-                            ],
+                              );
+                            },
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () async {
+                                    Recolector? recolector =
+                                        await _showAddRecolectorDialog(
+                                            context,
+                                            recolectorController,
+                                            'Actualizar',
+                                            item);
+                                    recolectorController
+                                        .selectRecolector(item.cedula);
+                                    String cedula = recolectorController
+                                        .selectedCedula.value;
+                                    if (recolector != null) {
+                                      recolectorController.updateItem(
+                                          recolector, cedula);
+                                      Get.snackbar('Éxito',
+                                          'Recolector actualizado correctamente');
+                                    } else {
+                                      Get.snackbar('Error',
+                                          'No se actualizó el recolector');
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete_forever),
+                                  onPressed: () => recolectorController
+                                      .deleteRecolector(item.cedula),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     ),
                   );
                 }),
-                /*const SizedBox(
-                  height: 40,
-                ),*/
-                ElevatedButton(
-                  onPressed: () {
-                    recolectorController
-                        .generateExcel(); // Llamar al método para generar el Excel
-                  },
-                  child: SizedBox(
-                    width: 180,
-                    child: Row(
-                      children: [
-                        const Icon(Icons.file_download),
-                        const SizedBox(
-                          width: 2,
-                        ),
-                        const Text('Descargar Excel'),
-                        const SizedBox(
-                          width: 2,
-                        ),
-                        Image.asset('images/excel.png')
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
           ),

@@ -33,7 +33,7 @@ dependencies:
   firebase_core:
 
   get_storage:
-  firebase_storage:
+  firebase_storage:   #Versionar con el pubsec.log
   uuid:
   get:
   excel: ^2.0.4

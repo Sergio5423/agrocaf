@@ -223,44 +223,48 @@ class _PagosState extends State<HomeAdmin> {
                               itemCount: pesadaController.pesadas.length,
                               itemBuilder: (context, index) {
                                 final item = pesadaController.pesadas[index];
-                                return ListTile(
-                                  title: Text('Peso: ${item.peso} kg'),
-                                  subtitle: Text('Nombre: ${item.nombre}'),
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return Container(
-                                          padding: EdgeInsets.all(16.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text('Detalles de Pesada',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              SizedBox(height: 10),
-                                              Text(
-                                                  'Recolector: ${item.nombre}'),
-                                              Text('Cédula: ${item.cedula}'),
-                                              Text('Peso: ${item.peso} kg'),
-                                              Text(
-                                                  'Fecha: ${item.fecha.toString()}'),
-                                              SizedBox(height: 20),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('Cerrar'),
+                                return Card(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 5.0, horizontal: 10.0),
+                                    child: ListTile(
+                                      title: Text('Peso: ${item.peso} kg'),
+                                      subtitle: Text('Nombre: ${item.nombre}'),
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              padding: EdgeInsets.all(16.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Detalles de Pesada',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                      'Recolector: ${item.nombre}'),
+                                                  Text(
+                                                      'Cédula: ${item.cedula}'),
+                                                  Text('Peso: ${item.peso} kg'),
+                                                  Text(
+                                                      'Fecha: ${item.fecha.toString()}'),
+                                                  SizedBox(height: 20),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                );
+                                    ));
                               },
                             ),
                           );

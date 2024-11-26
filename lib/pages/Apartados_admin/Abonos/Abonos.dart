@@ -39,58 +39,58 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
             children: [
               Info(Texto: 'Abonos', cargo: 'Admin'),
               const SizedBox(height: 15),
-              // Lista de abonos
-              ListView.builder(
-                shrinkWrap:
-                    true, // Permite que la lista se ajuste al espacio disponible
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: abonos.length,
-                itemBuilder: (context, index) {
-                  final abono = abonos[index];
-                  return Card(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 5.0, horizontal: 10.0),
-                    child: ListTile(
-                      title: Text(abono['nombre']!),
-                      subtitle: Text('Cantidad: ${abono['cantidad']}'),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Detalles del Abono'),
-                              content: SingleChildScrollView(
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                    Text('Nombre: '),
-                                    Text('Cantidad: ')
-                                  ])),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Cerrar'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      leading: const Icon(Icons.money, color: Colors.green),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          setState(() {
-                            abonos.removeAt(
-                                index); // Elimina el abono de la lista
-                          });
+              // Wrap ListView.builder with a SizedBox or Expanded
+              SizedBox(
+                height: 300, // Adjust height as per your requirement
+                child: ListView.builder(
+                  itemCount: abonos.length,
+                  itemBuilder: (context, index) {
+                    final abono = abonos[index];
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 10.0),
+                      child: ListTile(
+                        title: Text(abono['nombre']!),
+                        subtitle: Text('Cantidad: ${abono['cantidad']}'),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Detalles del Abono'),
+                                content: SingleChildScrollView(
+                                    child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                      Text('Nombre: ${abono['nombre']}'),
+                                      Text('Cantidad: ${abono['cantidad']}')
+                                    ])),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Cerrar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
+                        leading: const Icon(Icons.money, color: Colors.green),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              abonos.removeAt(
+                                  index); // Elimina el abono de la lista
+                            });
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 15),
               ElevatedButton(

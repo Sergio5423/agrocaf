@@ -103,18 +103,17 @@ class RegistroPesadaOperador extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item =
                           recolectorController.filteredRecolectores[index];
-                      return ListTile(
-                        title: Text(item.nombre),
-                        subtitle: Text(item.cedula),
-                        onTap: () {
-                          pesadaController.updateSelectedRecolector(item);
-                          Get.snackbar(item.nombre, 'seleccionado');
-                        },
-                        /*trailing: IconButton(
-            icon: Image.asset('images/basura.png'),
-            onPressed: () => recolectorController
-                .deleteRecolector(item.cedula),
-          ),*/
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 10.0),
+                        child: ListTile(
+                          title: Text(item.nombre),
+                          subtitle: Text(item.cedula),
+                          onTap: () {
+                            pesadaController.updateSelectedRecolector(item);
+                            Get.snackbar(item.nombre, 'seleccionado');
+                          },
+                        ),
                       );
                     },
                   ),

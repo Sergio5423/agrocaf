@@ -17,16 +17,6 @@ class PesadasAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     pesadaController.fetchPesadas();
     return Scaffold(
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //Get.to(AddPesadas());
-        },
-        backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),*/
       bottomNavigationBar: BottomNaviAdmin(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
@@ -62,73 +52,78 @@ class PesadasAdmin extends StatelessWidget {
                         itemCount: pesadaController.pesadas.length,
                         itemBuilder: (context, index) {
                           final item = pesadaController.pesadas[index];
-                          return ListTile(
-                            title: Text(item.nombre),
-                            subtitle: Text(item.peso),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      'Detalles de Pesada',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    content: SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text('Recolector: ${item.nombre}'),
-                                          Text('Cédula: ${item.cedula}'),
-                                          Text('Peso: ${item.peso} kg'),
-                                          Text(
-                                              'Fecha: ${item.fecha.toString()}'),
-                                          SizedBox(height: 20),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Cerrar'),
+                          return Card(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 10.0),
+                              child: ListTile(
+                                title: Text(item.nombre),
+                                subtitle: Text(item.peso),
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text(
+                                          'Detalles de Pesada',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                  'Recolector: ${item.nombre}'),
+                                              Text('Cédula: ${item.cedula}'),
+                                              Text('Peso: ${item.peso} kg'),
+                                              Text(
+                                                  'Fecha: ${item.fecha.toString()}'),
+                                              SizedBox(height: 20),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('Cerrar'),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: Icon(Icons.edit),
-                                  onPressed: () async {
-                                    //print(item.id);
-                                    Pesada? pesada = await _showAddPesadaDialog(
-                                        context,
-                                        pesadaController,
-                                        'Actualizar',
-                                        item);
-                                    if (pesada != null) {
-                                      pesadaController.updateItem(pesada);
-                                      Get.snackbar('Éxito',
-                                          'Recolector actualizado correctamente');
-                                    } else {
-                                      Get.snackbar('Error',
-                                          'No se actualizó el recolector');
-                                    }
-                                  },
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(Icons.edit),
+                                      onPressed: () async {
+                                        //print(item.id);
+                                        Pesada? pesada =
+                                            await _showAddPesadaDialog(
+                                                context,
+                                                pesadaController,
+                                                'Actualizar',
+                                                item);
+                                        if (pesada != null) {
+                                          pesadaController.updateItem(pesada);
+                                          Get.snackbar('Éxito',
+                                              'Recolector actualizado correctamente');
+                                        } else {
+                                          Get.snackbar('Error',
+                                              'No se actualizó el recolector');
+                                        }
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete_forever),
+                                      onPressed: () => pesadaController
+                                          .deletePesada(item.id.toString()),
+                                    ),
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: Icon(Icons.delete_forever),
-                                  onPressed: () => pesadaController
-                                      .deletePesada(item.id.toString()),
-                                ),
-                              ],
-                            ),
-                          );
+                              ));
                         },
                       ),
                     );
