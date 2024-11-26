@@ -1,4 +1,3 @@
-import 'package:agrocaf/controllers/auth_admin_controller.dart';
 import 'package:agrocaf/controllers/auth_operador_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
