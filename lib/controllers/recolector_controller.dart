@@ -9,6 +9,7 @@ import 'package:excel/excel.dart'; // Para crear archivos Excel
 import 'package:external_path/external_path.dart';
 
 class RecolectorController extends GetxController {
+  int i = 0;
   final RecolectorService _recolectorService = RecolectorService();
 
   var isLoading = false.obs; // Definir isLoading como observable
@@ -159,7 +160,7 @@ class RecolectorController extends GetxController {
     } // Guardar el archivo en el directorio de descargas
     final directory = Directory(
         '/storage/emulated/0/Download'); // Ruta del directorio de descargas en Android
-    final String filePath = '${directory.path}/recolectores.xlsx';
+    final String filePath = '${directory.path}/recolectores${i++}.xlsx';
     File(filePath)
       ..createSync(recursive: true)
       ..writeAsBytesSync(excel.encode()!);

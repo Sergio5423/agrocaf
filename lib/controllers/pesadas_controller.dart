@@ -6,10 +6,12 @@ import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/services/pesadas_service.dart';
 
 class PesadaController extends GetxController {
+  int i = 0;
   final PesadaService _pesadaService = PesadaService();
   var pesadas = <Pesada>[].obs;
   var filteredPesadas = <Pesada>[].obs; // Lista observable de ítems filtrados
   var isLoading = false.obs;
+  var valorKilo = ''.obs;
   var _selectedRecolectorNombre = ''.obs;
   var _selectedRecolectorCedula = ''.obs;
   var _selectedPesada = ''.obs;
@@ -100,7 +102,8 @@ class PesadaController extends GetxController {
     } // Guardar el archivo en el directorio de descargas
     final directory = Directory(
         '/storage/emulated/0/Download'); // Ruta del directorio de descargas en Android
-    final String filePath = '${directory.path}/pesadas.xlsx';
+
+    final String filePath = '${directory.path}/pesadas${i++}.xlsx';
     File(filePath)
       ..createSync(recursive: true)
       ..writeAsBytesSync(excel.encode()!);
