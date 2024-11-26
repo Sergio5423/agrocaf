@@ -12,9 +12,8 @@ class Admin_Abonos extends StatefulWidget {
 class _Admin_AbonosState extends State<Admin_Abonos> {
   // Datos de ejemplo para la lista de abonos
   final List<Map<String, String>> abonos = [
-    {'nombre': 'Abono Orgánico', 'cantidad': '50 kg'},
-    {'nombre': 'Abono Químico', 'cantidad': '30 kg'},
-    {'nombre': 'Fertilizante NPK', 'cantidad': '20 kg'},
+    {'nombre': 'Sergio', 'cantidad': '450000'},
+    {'nombre': 'Adriana', 'cantidad': '370000'},
   ];
 
   @override
@@ -24,14 +23,16 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
         onPressed: () {
           // Acción para agregar un nuevo abono
         },
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
         child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
       ),
       bottomNavigationBar: BottomNaviOperador(),
-      appBar: AppBar(title: const Text('Abonos')),
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -77,9 +78,9 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
                           },
                         );
                       },
-                      leading: const Icon(Icons.grass, color: Colors.green),
+                      leading: const Icon(Icons.money, color: Colors.green),
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
+                        icon: const Icon(Icons.delete),
                         onPressed: () {
                           setState(() {
                             abonos.removeAt(
