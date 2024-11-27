@@ -1,5 +1,6 @@
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
+import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 
 class Admin_Abonos extends StatefulWidget {
@@ -29,7 +30,7 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNaviOperador(),
+      bottomNavigationBar: BottomNaviAdmin(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
       ),
