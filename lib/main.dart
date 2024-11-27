@@ -56,7 +56,7 @@ class agrocaf extends StatelessWidget {
         //GetPage(page: () => const Lotes_Operador(), name: '/lotes_operador'),
         GetPage(page: () => PesadasOperador(), name: '/pesadas_operador'),
         GetPage(page: () => PesadasAdmin(), name: '/pesadas_admin'),
-        GetPage(page: () => LotesAdmin(), name: '/lotesAdmin'),
+        GetPage(page: () => LotesAdmin(), name: '/lotes'),
         GetPage(
             page: () => RecolectoresOperador(), name: '/recolectores_operador'),
         GetPage(page: () => RecolectoresAdmin(), name: '/recolectores_admin'),

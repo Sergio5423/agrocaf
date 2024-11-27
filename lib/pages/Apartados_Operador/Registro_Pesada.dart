@@ -1,5 +1,7 @@
+import 'package:agrocaf/controllers/lotes_controller.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
+import 'package:agrocaf/models/lotes_model.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
@@ -9,28 +11,26 @@ import 'package:get/get.dart';
 class RegistroPesadaOperador extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _pesadaController = TextEditingController();
+  final RxString selectedLote = ''.obs; // Reactive variable for selected lote
 
-  RegistroPesadaOperador({super.key}); // Controlador para la pesada
+  RegistroPesadaOperador({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final RecolectorController recolectorController =
-        Get.find(); // Obtener el controlador de RecolectorController
+    final RecolectorController recolectorController = Get.find();
     final PesadaController pesadaController = Get.put(PesadaController());
+    final LoteController loteController = Get.put(LoteController());
 
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Información general (Logo, título)
               Info(
                 Texto: 'Valor del Kilo',
                 cargo: 'Operador',
               ),
-
               const SizedBox(height: 20),
-
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 40),
                 padding: const EdgeInsets.all(20),
@@ -60,8 +60,7 @@ class RegistroPesadaOperador extends StatelessWidget {
                         const SizedBox(width: 20),
                         Expanded(
                           child: TextField(
-                            controller:
-                                _pesadaController, // Controlador para el campo de pesada
+                            controller: _pesadaController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
                               labelText: 'Pesada',
@@ -71,12 +70,37 @@ class RegistroPesadaOperador extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        const Text('Escoja un lote:  '),
+                        Obx(() {
+                          return DropdownButton<String>(
+                            value: selectedLote.value.isNotEmpty
+                                ? selectedLote.value
+                                : null,
+                            hint: const Text("Seleccione el lote"),
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                selectedLote.value =
+                                    newValue; // Update selected value
+                              }
+                            },
+                            items: loteController.filteredLotes
+                                .map<DropdownMenuItem<String>>((Lote lote) {
+                              return DropdownMenuItem<String>(
+                                value: lote.nombre,
+                                child: Text(lote.nombre),
+                              );
+                            }).toList(),
+                          );
+                        }),
+                      ],
+                    ),
                   ],
                 ),
               ),
-
-              const SizedBox(height: 60),
-
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
@@ -87,14 +111,11 @@ class RegistroPesadaOperador extends StatelessWidget {
                       border: OutlineInputBorder(),
                       hintText: 'Ingrese Nombre a Buscar'),
                   onChanged: (value) {
-                    recolectorController.updateSearchQuery(
-                        value); // Actualizar la búsqueda en el controlador
+                    recolectorController.updateSearchQuery(value);
                   },
                 ),
               ),
-
               const SizedBox(height: 20),
-
               Obx(() {
                 return SizedBox(
                   height: 300,
@@ -111,7 +132,7 @@ class RegistroPesadaOperador extends StatelessWidget {
                           subtitle: Text(item.cedula),
                           onTap: () {
                             pesadaController.updateSelectedRecolector(item);
-                            Get.snackbar(item.nombre, 'seleccionado');
+                            Get.snackbar(item.nombre, 'Seleccionado');
                           },
                         ),
                       );
@@ -123,46 +144,35 @@ class RegistroPesadaOperador extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Stack(
-        children: [
-          Positioned(
-            bottom: 20,
-            right: 2,
-            child: FloatingActionButton(
-              onPressed: () async {
-                if (_pesadaController.text.isNotEmpty) {
-                  String cedula = pesadaController.selectedRecolectorCedula;
-                  String nombre = pesadaController.selectedRecolectorNombre;
-                  String peso = _pesadaController.text.trim();
-                  DateTime fecha = DateTime.now();
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          if (_pesadaController.text.isNotEmpty &&
+              selectedLote.value.isNotEmpty) {
+            String cedula = pesadaController.selectedRecolectorCedula;
+            String nombre = pesadaController.selectedRecolectorNombre;
+            String peso = _pesadaController.text.trim();
+            DateTime fecha = DateTime.now();
 
-                  Pesada nuevaPesada = Pesada(
-                    cedula: cedula,
-                    nombre: nombre,
-                    peso: peso,
-                    fecha: fecha,
-                  );
+            Pesada nuevaPesada = Pesada(
+              cedula: cedula,
+              nombre: nombre,
+              peso: peso,
+              fecha: fecha,
+              lote: selectedLote.value,
+            );
 
-                  await pesadaController.savePesada(nuevaPesada);
-
-                  // Limpia el campo de texto después de guardar
-                  _pesadaController.clear();
-
-                  // Muestra un mensaje de éxito
-                  Get.snackbar('Éxito', 'Pesada guardada correctamente');
-                } else {
-                  // Muestra un mensaje de error si el campo de peso está vacío
-                  Get.snackbar('Error', 'Por favor ingresa el peso');
-                }
-              },
-              backgroundColor: Colors.white,
-              child: const Icon(
-                Icons.add,
-                color: Color.fromRGBO(76, 140, 43, 1),
-              ),
-            ),
-          ),
-        ],
+            await pesadaController.savePesada(nuevaPesada);
+            _pesadaController.clear();
+            Get.snackbar('Éxito', 'Pesada guardada correctamente');
+          } else {
+            Get.snackbar('Error', 'Por favor ingrese todos los datos');
+          }
+        },
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.add,
+          color: Color.fromRGBO(76, 140, 43, 1),
+        ),
       ),
     );
   }

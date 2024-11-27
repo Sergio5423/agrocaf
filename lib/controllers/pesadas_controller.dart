@@ -91,12 +91,14 @@ class PesadaController extends GetxController {
     sheet.appendRow([
       'Recolector',
       'Peso',
+      'Lote',
       'Fecha',
     ]); // Agregar datos
     for (var pesada in pesadas) {
       sheet.appendRow([
         pesada.nombre,
         pesada.peso,
+        pesada.lote,
         pesada.fecha.toString(),
       ]);
     } // Guardar el archivo en el directorio de descargas

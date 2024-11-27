@@ -138,31 +138,44 @@ class RecolectorController extends GetxController {
 
   // Método para generar el archivo Excel
   Future<void> generateExcel() async {
-    var excel = Excel.createExcel(); // Crear un nuevo libro de Excel
-    Sheet sheet = excel['Sheet1']; // Agregar encabezados
-    sheet.appendRow([
-      'Cédula',
-      'Nombre del Recolector',
-      'Teléfono',
-      'Método de Pago',
-      'Número de Cuenta'
-    ]); // Agregar datos de recolectores
-    for (var recolector in recolectores) {
+    try {
+      // Crear un nuevo libro de Excel
+      var excel = Excel.createExcel(); // Obtener la hoja
+      Sheet? sheet = excel['Sheet1'];
+      if (sheet == null) {
+        throw StateError('Error: No se pudo crear la hoja de Excel.');
+      } // Agregar encabezados
       sheet.appendRow([
-        recolector.cedula,
-        recolector.nombre,
-        recolector.telefono,
-        recolector.metodopago,
-        recolector.ncuenta
-      ]);
-    } // Guardar el archivo en el directorio de descargas
-    final directory = Directory(
-        '/storage/emulated/0/Download'); // Ruta del directorio de descargas en Android
-    final String filePath = '${directory.path}/recolectores${i++}.xlsx';
-    File(filePath)
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(excel.encode()!);
-    Get.snackbar('Éxito', 'Archivo Excel generado en: $filePath');
-    // Mostrar un mensaje de éxito }
+        'Cédula',
+        'Nombre del Recolector',
+        'Teléfono',
+        'Método de Pago',
+        'Número de Cuenta'
+      ]); // Asegurarte de que recolectores no esté vacío
+      if (recolectores.isNotEmpty) {
+        for (var recolector in recolectores) {
+          sheet.appendRow([
+            recolector.cedula,
+            recolector.nombre,
+            recolector.telefono,
+            recolector.metodopago,
+            recolector.ncuenta
+          ]);
+        }
+      } else {
+        print(
+            'No hay recolectores disponibles para agregar a la hoja de Excel.');
+      } // Guardar el archivo en el directorio de descargas
+      final directory = Directory(
+          '/storage/emulated/0/Download'); // Ruta del directorio de descargas en Android
+      final String filePath = '${directory.path}/recolectores${i++}.xlsx';
+      File(filePath)
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(excel.encode()!);
+      Get.snackbar('Éxito', 'Archivo Excel generado en: $filePath');
+    } catch (e) {
+      print('Ocurrió un error al generar el archivo Excel: $e');
+      Get.snackbar('Error', 'Ocurrió un error al generar el archivo Excel');
+    }
   }
 }

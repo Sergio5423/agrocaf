@@ -17,45 +17,47 @@ class RegisterAdminPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(height: 50),
-              Text(
-                'Registro',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const SizedBox(height: 50),
+                Text(
+                  'Registro',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+                const SizedBox(height: 40),
+                _buildTextField(context, 'Nombre', _nameController),
+                const SizedBox(height: 20),
+                _buildTextField(context, 'Email', _emailController),
+                const SizedBox(height: 20),
+                _buildTextField(context, 'Contraseña', _passwordController,
+                    obscureText: true),
+                const SizedBox(height: 40),
+                Obx(() => _authController.isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : _buildRegisterButton(context)),
+                const SizedBox(height: 20), // Cambia Spacer por SizedBox aquí
+                Center(
+                  child: GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Text(
+                      '¿Ya tienes cuenta? Inicia sesión',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
                     ),
-              ),
-              const SizedBox(height: 40),
-              _buildTextField(context, 'Nombre', _nameController),
-              const SizedBox(height: 20),
-              _buildTextField(context, 'Email', _emailController),
-              const SizedBox(height: 20),
-              _buildTextField(context, 'Contraseña', _passwordController,
-                  obscureText: true),
-              const SizedBox(height: 40),
-              Obx(() => _authController.isLoading.value
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildRegisterButton(context)),
-              const Spacer(),
-              Center(
-                child: GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Text(
-                    '¿Ya tienes cuenta? Inicia sesión',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

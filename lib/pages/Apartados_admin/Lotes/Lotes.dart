@@ -13,6 +13,7 @@ class LotesAdmin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    loteController.fetchLotes();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -58,22 +59,25 @@ class LotesAdmin extends StatelessWidget {
                   itemCount: loteController.filteredLotes.length,
                   itemBuilder: (context, index) {
                     final item = loteController.filteredLotes[index];
-                    return ListTile(
-                      title: Text(item.nombre),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.delete_forever),
-                            onPressed: () {
-                              if (item.id != null) {
-                                loteController.deleteLote(item.id!);
-                              }
-                            },
+                    return Card(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 10.0),
+                        child: ListTile(
+                          title: Text(item.nombre),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.delete_forever),
+                                onPressed: () {
+                                  if (item.id != null) {
+                                    loteController.deleteLote(item.id!);
+                                  }
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    );
+                        ));
                   },
                 ),
               );

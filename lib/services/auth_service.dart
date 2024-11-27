@@ -7,8 +7,8 @@ class FirebaseService {
       FirebaseFirestore.instance; // Instancia de Firestore
 
   // Método para registrar un usuario con correo y contraseña
-  Future<User?> registerWithEmail(
-      String email, String password, String name, String dataBase) async {
+  Future<User?> registerWithEmail(String email, String password, String name,
+      String cargo, String dataBase) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -22,6 +22,7 @@ class FirebaseService {
       if (user != null) {
         await _firestore.collection(dataBase).doc(user.uid).set({
           'name': name,
+          'cargo': cargo,
           'email': email,
           'createdAt': FieldValue.serverTimestamp(),
         });

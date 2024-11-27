@@ -16,7 +16,7 @@ class AuthOperadorController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _autoLogin(); // Intentar login automático al iniciar
+    //_autoLogin(); // Intentar login automático al iniciar
   }
 
   // Método para registrar el usuario y guardar datos en Firestore
@@ -24,7 +24,7 @@ class AuthOperadorController extends GetxController {
     try {
       isLoading.value = true;
       User? newUser = await _firebaseService.registerWithEmail(
-          email, password, name, 'usuarios');
+          email, password, name, 'operador', 'usuarios');
       if (newUser != null) {
         user.value = newUser; // Usuario registrado exitosamente
         await _saveCredentials(email, password); // Guardar credenciales
