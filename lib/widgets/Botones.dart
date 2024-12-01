@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class Container_Button_PagoState extends StatefulWidget {
+class Container_Button_State extends StatefulWidget {
   final String imagen;
   final String texto;
   final String ruta; // Parámetro para la ruta
 
-  const Container_Button_PagoState({
+  const Container_Button_State({
     super.key,
     required this.imagen,
     required this.texto,
@@ -15,12 +15,11 @@ class Container_Button_PagoState extends StatefulWidget {
   });
 
   @override
-  State<Container_Button_PagoState> createState() =>
+  State<Container_Button_State> createState() =>
       __Container_Button_PagoStateState();
 }
 
-class __Container_Button_PagoStateState
-    extends State<Container_Button_PagoState> {
+class __Container_Button_PagoStateState extends State<Container_Button_State> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,5 +1,4 @@
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
-import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +37,7 @@ class _Admin_AbonosState extends State<Admin_Abonos> {
         child: SafeArea(
           child: Column(
             children: [
-              Info(Texto: 'Abonos', cargo: 'Admin'),
+              Info(texto: 'Abonos', cargo: 'Admin'),
               const SizedBox(height: 15),
               // Wrap ListView.builder with a SizedBox or Expanded
               SizedBox(

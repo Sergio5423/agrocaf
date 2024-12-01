@@ -47,7 +47,7 @@ class _TemporadasState extends State<Temporadas> {
           child: Column(
             children: [
               Info(
-                Texto: 'Temporada',
+                texto: 'Temporada',
                 cargo: 'Admin',
               ),
               const SizedBox(height: 16),

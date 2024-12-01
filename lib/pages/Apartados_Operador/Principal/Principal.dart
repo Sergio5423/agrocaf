@@ -1,7 +1,7 @@
 import 'package:agrocaf/controllers/pesadas_controller.dart';
 import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
-import 'package:agrocaf/widgets/Botones_Pagos.dart';
+import 'package:agrocaf/widgets/Botones.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorOperador.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +34,7 @@ class _PagosState extends State<Principal> {
           children: [
             Info(
               cargo: 'Operador',
-              Texto: '',
+              texto: '',
             ),
             const SizedBox(
               height: 15,
@@ -64,13 +64,13 @@ class _PagosState extends State<Principal> {
                                   mainAxisAlignment: MainAxisAlignment
                                       .center, // Opcional: centrar el contenido en el Row
                                   children: [
-                                    Container_Button_PagoState(
+                                    Container_Button_State(
                                         ruta: '/recolectores_operador',
                                         imagen: 'images/Reco.png',
                                         texto: 'Recolectores'),
                                     SizedBox(width: 16),
                                     // Espacio de 16 píxeles entre el primer y el segundo botón
-                                    Container_Button_PagoState(
+                                    Container_Button_State(
                                         ruta: '/pesadas_operador',
                                         imagen: 'images/Pesa.png',
                                         texto: 'Pesadas'),

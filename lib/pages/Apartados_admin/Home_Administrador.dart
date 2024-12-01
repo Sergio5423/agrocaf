@@ -1,8 +1,10 @@
+import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
-import 'package:agrocaf/widgets/Botones_Pagos.dart';
+import 'package:agrocaf/models/kilo_model.dart';
+import 'package:agrocaf/widgets/Botones.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:agrocaf/widgets/LogoutAdmin.dart';
-import 'package:agrocaf/widgets/informacion/info2.dart';
+import 'package:agrocaf/widgets/informacion/info.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +19,7 @@ class HomeAdmin extends StatefulWidget {
 
 class _PagosState extends State<HomeAdmin> {
   final PesadaController pesadaController = Get.put(PesadaController());
+  final KiloController kiloController = Get.put(KiloController());
   final TextEditingController valorKiloController = TextEditingController();
 
   @override
@@ -37,7 +40,7 @@ class _PagosState extends State<HomeAdmin> {
           child: Column(
             children: [
               // Mostrar el valor de valorKilo de manera reactiva
-              informacionValor(cargo: 'Admin'),
+              Info(texto: '', cargo: 'Admin'),
               const SizedBox(
                 height: 15,
               ),
@@ -65,17 +68,17 @@ class _PagosState extends State<HomeAdmin> {
                                   child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container_Button_PagoState(
+                                      Container_Button_State(
                                           ruta: '/recolectores_admin',
                                           imagen: 'images/Reco.png',
                                           texto: 'Recolectores'),
                                       SizedBox(width: 16),
-                                      Container_Button_PagoState(
+                                      Container_Button_State(
                                           ruta: '/pesadas_admin',
                                           imagen: 'images/Pesa.png',
                                           texto: 'Pesadas'),
                                       SizedBox(width: 16),
-                                      Container_Button_PagoState(
+                                      Container_Button_State(
                                           ruta: '/lotes',
                                           imagen: 'images/Lotes.png',
                                           texto: 'Lotes'),
@@ -90,17 +93,21 @@ class _PagosState extends State<HomeAdmin> {
                                 child: Row(
                                   children: [
                                     SizedBox(width: 16),
-                                    Container_Button_PagoState(
+                                    Container_Button_State(
                                         ruta: '/apartado_abono',
                                         imagen: 'images/Abonos.png',
                                         texto: 'Abonos'),
                                     SizedBox(width: 16),
-                                    Container_Button_PagoState(
+                                    Container_Button_State(
                                         ruta: '/temporadas',
                                         imagen: 'images/calendario.png',
                                         texto: 'Temporadas'),
                                     SizedBox(width: 16),
-                                    Container(
+                                    Container_Button_State(
+                                        imagen: 'images/pagos.png',
+                                        texto: 'Pagos',
+                                        ruta: '/pagos'),
+                                    /*Container(
                                       width: 100,
                                       height: 120,
                                       decoration: BoxDecoration(
@@ -135,65 +142,16 @@ class _PagosState extends State<HomeAdmin> {
                                                   children: [
                                                     Image.asset(
                                                         'images/kilo.png'),
-                                                    Text('Kilo')
+                                                    const Text('Kilo')
                                                   ],
                                                 ),
-                                                onTap: () {
-                                                  // Mostrar el AlertDialog
-                                                  showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Ingrese el Valor del Kilo'),
-                                                        content: TextField(
-                                                          controller:
-                                                              valorKiloController,
-                                                          inputFormatters: [
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          decoration:
-                                                              InputDecoration(
-                                                            labelText:
-                                                                'Ingrese solo números',
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                          ),
-                                                        ),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              String valorkilo =
-                                                                  valorKiloController
-                                                                      .text;
-                                                              print(
-                                                                  "Valor Kilo: $valorkilo");
-
-                                                              pesadaController
-                                                                      .valorKilo
-                                                                      .value =
-                                                                  valorkilo;
-
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child:
-                                                                Text('Aceptar'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                },
+                                                onTap: () {},
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
+                                    ),*/
                                   ],
                                 ),
                               ),

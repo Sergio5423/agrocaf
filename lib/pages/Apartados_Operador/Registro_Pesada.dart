@@ -1,3 +1,4 @@
+import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:agrocaf/controllers/lotes_controller.dart';
 import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
@@ -20,6 +21,7 @@ class RegistroPesadaOperador extends StatelessWidget {
     final RecolectorController recolectorController = Get.find();
     final PesadaController pesadaController = Get.put(PesadaController());
     final LoteController loteController = Get.put(LoteController());
+    final KiloController kiloController = Get.put(KiloController());
 
     return Scaffold(
       body: SafeArea(
@@ -27,7 +29,7 @@ class RegistroPesadaOperador extends StatelessWidget {
           child: Column(
             children: [
               Info(
-                Texto: 'Valor del Kilo',
+                texto: 'Valor del Kilo',
                 cargo: 'Operador',
               ),
               const SizedBox(height: 20),
@@ -154,12 +156,12 @@ class RegistroPesadaOperador extends StatelessWidget {
             DateTime fecha = DateTime.now();
 
             Pesada nuevaPesada = Pesada(
-              cedula: cedula,
-              nombre: nombre,
-              peso: peso,
-              fecha: fecha,
-              lote: selectedLote.value,
-            );
+                cedula: cedula,
+                nombre: nombre,
+                peso: peso,
+                fecha: fecha,
+                lote: selectedLote.value,
+                precio: kiloController.kiloList.first.valor);
 
             await pesadaController.savePesada(nuevaPesada);
             _pesadaController.clear();

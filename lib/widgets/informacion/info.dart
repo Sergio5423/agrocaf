@@ -1,23 +1,23 @@
+import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Info extends StatefulWidget {
-  final String Texto;
+  final String texto;
   final String cargo; // Añadido: parámetro para el valor del kilo
 
   // Constructor que recibe el valor del kilo
-  const Info({super.key, required this.Texto, required this.cargo});
+  const Info({super.key, required this.texto, required this.cargo});
 
   @override
   _InfoState createState() => _InfoState();
 }
 
 class _InfoState extends State<Info> {
-  late String valorDelKilo; // Variable para almacenar el valor del kilo
-
+  final KiloController kiloController = Get.put(KiloController());
   @override
   void initState() {
     super.initState();
-    valorDelKilo = widget.Texto; // Inicializa el valor del kilo
   }
 
   @override
@@ -69,12 +69,30 @@ class _InfoState extends State<Info> {
                   alignment: Alignment.center, // Alineación centrada
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      valorDelKilo,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          fontSize: 20),
+                    child: Obx(
+                      () {
+                        final kiloList = kiloController.kiloList;
+                        if (kiloList.isEmpty) {
+                          return const Text(
+                            'Valor no ingresado',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 20,
+                            ),
+                          );
+                        } else {
+                          final valorKilo = kiloList.first.valor.toString();
+                          return Text(
+                            'Kilo a \$$valorKilo',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 20,
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),

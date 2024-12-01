@@ -1,11 +1,18 @@
-import 'package:agrocaf/controllers/pesadas_controller.dart';
+/*import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';  // Asegúrate de que GetX esté importado
+import 'package:get/get.dart'; // Asegúrate de que GetX esté importado
 
-class informacionValor extends StatelessWidget {
+class informacionValor extends StatefulWidget {
   final String cargo;
 
-  const informacionValor({super.key, required this.cargo});
+  informacionValor({super.key, required this.cargo});
+
+  @override
+  State<informacionValor> createState() => _informacionValorState();
+}
+
+class _informacionValorState extends State<informacionValor> {
+  final KiloController kiloController = Get.put(KiloController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class informacionValor extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    'Agrocaf\n${cargo}',
+                    'Agrocaf\n${widget.cargo}',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: const Color.fromRGBO(255, 255, 255, 0.965),
                           fontWeight: FontWeight.bold,
@@ -53,20 +60,34 @@ class informacionValor extends StatelessWidget {
                 width: 300,
                 color: Colors.white,
                 child: Align(
-                  alignment: Alignment.center, 
+                  alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Obx(() {
-                      final valorKilo = Get.find<PesadaController>().valorKilo.value;
-                      return Text(
-                        valorKilo.isEmpty ? 'Valor no ingresado' : 'valor kilo  ${valorKilo}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                      );
-                    }),
+                    child: Obx(
+                      () {
+                        final kiloList = kiloController.kiloList;
+                        if (kiloList.isEmpty) {
+                          return const Text(
+                            'Valor no ingresado',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 20,
+                            ),
+                          );
+                        } else {
+                          final valorKilo = kiloList.first.valor.toString();
+                          return Text(
+                            'valor kilo  $valorKilo',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 20,
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -77,3 +98,4 @@ class informacionValor extends StatelessWidget {
     );
   }
 }
+*/

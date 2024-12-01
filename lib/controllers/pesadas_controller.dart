@@ -11,7 +11,6 @@ class PesadaController extends GetxController {
   var pesadas = <Pesada>[].obs;
   var filteredPesadas = <Pesada>[].obs; // Lista observable de ítems filtrados
   var isLoading = false.obs;
-  var valorKilo = ''.obs;
   var _selectedRecolectorNombre = ''.obs;
   var _selectedRecolectorCedula = ''.obs;
   var _selectedPesada = ''.obs;

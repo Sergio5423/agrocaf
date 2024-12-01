@@ -18,7 +18,7 @@ class _Admin_ReportesState extends State<Reportes> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
-          children: [Info(Texto: 'Reportes', cargo: '')],
+          children: [Info(texto: 'Reportes', cargo: '')],
         )),
       ),
     );

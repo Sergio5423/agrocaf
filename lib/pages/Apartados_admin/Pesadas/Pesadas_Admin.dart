@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
+import 'package:agrocaf/models/kilo_model.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
 import 'package:agrocaf/widgets/LogoutAdmin.dart';
@@ -10,7 +12,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 class PesadasAdmin extends StatelessWidget {
   final PesadaController pesadaController = Get.put(PesadaController());
-
+  final KiloController kiloController = Get.put(KiloController());
   PesadasAdmin({super.key});
 
   @override
@@ -28,7 +30,7 @@ class PesadasAdmin extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            Info(Texto: 'Pesadas', cargo: 'Admin'),
+            Info(texto: 'Pesadas', cargo: 'Admin'),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -231,13 +233,13 @@ class PesadasAdmin extends StatelessWidget {
                 String lote = _loteController.text.trim();
                 if (cedRecolector.isNotEmpty && peso.isNotEmpty) {
                   Pesada updatedPesada = Pesada(
-                    id: pesada.id,
-                    nombre: nomRecolector,
-                    cedula: cedRecolector,
-                    peso: peso,
-                    fecha: fecha,
-                    lote: lote,
-                  );
+                      id: pesada.id,
+                      nombre: nomRecolector,
+                      cedula: cedRecolector,
+                      peso: peso,
+                      fecha: fecha,
+                      lote: lote,
+                      precio: kiloController.kiloList.first.valor);
                   Navigator.of(context).pop();
                   completer.complete(updatedPesada);
                 } else {

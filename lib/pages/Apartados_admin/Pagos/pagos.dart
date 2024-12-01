@@ -6,16 +6,16 @@ import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LotesAdmin extends StatelessWidget {
-  final LoteController loteController = Get.put(LoteController());
+class PagosAdmin extends StatelessWidget {
+  // final PagoController pagoController = Get.put(PagoController());
 
-  LotesAdmin({super.key});
+  PagosAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
-    loteController.fetchLotes();
+    //loteController.fetchLotes();
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+        /*floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Lote loteVacio = Lote();
           Lote? lote = await _showAddLoteDialog(
@@ -84,11 +84,11 @@ class LotesAdmin extends StatelessWidget {
             }),
           ],
         ),
-      ),
-    );
+      ),*/
+        );
   }
 
-  Future<Lote?> _showAddLoteDialog(BuildContext context,
+  /*Future<Lote?> _showAddLoteDialog(BuildContext context,
       LoteController loteController, String titulo, Lote lote) async {
     final TextEditingController nombreController =
         TextEditingController(text: lote.nombre);
@@ -123,5 +123,5 @@ class LotesAdmin extends StatelessWidget {
         );
       },
     );
-  }
+  }*/
 }

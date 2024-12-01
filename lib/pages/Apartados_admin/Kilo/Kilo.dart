@@ -18,7 +18,7 @@ class _Admin_KiloState extends State<Admin_Kilo> {
       body: SingleChildScrollView(
         child: SafeArea(
             child: Column(
-          children: [Info(Texto: 'Kilo', cargo: 'Admin')],
+          children: [Info(texto: 'Kilo', cargo: 'Admin')],
         )),
       ),
     );
