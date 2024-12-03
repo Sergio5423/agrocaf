@@ -1,15 +1,23 @@
-import 'package:agrocaf/controllers/auth_admin_controller.dart';
+import 'package:agrocaf/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterAdminPage extends StatelessWidget {
-  final AuthAdminController _authController =
-      Get.put(AuthAdminController()); // Cambiado a AuthAdminController
+class RegisterAdminPage extends StatefulWidget {
+  RegisterAdminPage({Key? key}) : super(key: key);
+
+  @override
+  _RegisterAdminPageState createState() => _RegisterAdminPageState();
+}
+
+class _RegisterAdminPageState extends State<RegisterAdminPage> {
+  final AuthController _authController =
+      Get.put(AuthController()); // Cambiado a AuthAdminController
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  RegisterAdminPage({super.key});
+  final List<String> _roles = ['admin', 'operador'];
+  String? _selectedRole;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +50,32 @@ class RegisterAdminPage extends StatelessWidget {
                 _buildTextField(context, 'Contraseña', _passwordController,
                     obscureText: true),
                 const SizedBox(height: 40),
+                DropdownButtonFormField<String>(
+                  hint: Text('Selecciona un rol'),
+                  value: _selectedRole,
+                  items: _roles.map((String role) {
+                    return DropdownMenuItem<String>(
+                      value: role,
+                      child: Text(role),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedRole = newValue;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Por favor, selecciona un rol';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 40),
                 Obx(() => _authController.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
                     : _buildRegisterButton(context)),
-                const SizedBox(height: 20), // Cambia Spacer por SizedBox aquí
+                const SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
                     onTap: () => Get.back(),
@@ -88,7 +118,15 @@ class RegisterAdminPage extends StatelessWidget {
           String name = _nameController.text.trim();
           String email = _emailController.text.trim();
           String password = _passwordController.text.trim();
-          _authController.register(email, password, name);
+
+          if (_selectedRole == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Por favor, selecciona un rol')),
+            );
+          } else {
+            _authController.register(
+                email, password, name, _selectedRole.toString());
+          }
         },
         child: const Text(
           'Registrarse',

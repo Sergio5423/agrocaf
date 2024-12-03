@@ -9,6 +9,7 @@ import 'package:agrocaf/pages/Apartados_admin/Abonos/Abonos.dart';
 import 'package:agrocaf/pages/Apartados_admin/Kilo/Kilo.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Pesadas/Pesadas_Operador.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Recolectores/Recolectores_Operador.dart';
+import 'package:agrocaf/pages/Login/login.dart';
 import 'package:agrocaf/pages/Reportes.dart';
 import 'package:agrocaf/firebase_options.dart';
 import 'package:agrocaf/pages/Login/login_opciones.dart';
@@ -44,11 +45,11 @@ class agrocaf extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: LoginOpciones(),
+      home: Login(),
       initialRoute: '/',
       getPages: [
-        GetPage(page: () => LoginOpciones(), name: '/'),
-        GetPage(page: () => LoginOperador(), name: '/LoginOperador'),
+        //GetPage(page: () => Login(), name: '/'),
+        //GetPage(page: () => LoginOperador(), name: '/LoginOperador'),
         GetPage(page: () => const HomeOperador(), name: '/homeOperador'),
         GetPage(page: () => const HomeAdmin(), name: '/homeAdministrador'),
         //GetPage(page: () => Apartado_Operador(), name: '/apartado_ope'),

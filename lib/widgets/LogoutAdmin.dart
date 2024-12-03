@@ -1,4 +1,4 @@
-import 'package:agrocaf/controllers/auth_admin_controller.dart';
+import 'package:agrocaf/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +7,7 @@ class LogoutAdmin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthAdminController authController = Get.find();
+    final AuthController authController = Get.find();
 
     return IconButton(
       icon: const Icon(Icons.logout),

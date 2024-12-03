@@ -1,5 +1,5 @@
-import 'package:agrocaf/pages/Login/login_operador.dart';
-import 'package:agrocaf/pages/Login/login_admin.dart';
+/*import 'package:agrocaf/pages/Login/login_operador.dart';
+import 'package:agrocaf/pages/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +10,8 @@ class LoginOpciones extends StatelessWidget {
     Get.to(LoginOperador());
   }
 
-  void _LoginAdmin(BuildContext context) {
-    Get.to(LoginAdmin());
+  void _Login(BuildContext context) {
+    Get.to(Login());
   }
 
   @override
@@ -86,7 +86,7 @@ class LoginOpciones extends StatelessWidget {
                               icon: Image.asset('images/iconadmin.png'),
                               iconSize: 50.0,
                               onPressed: () {
-                                _LoginAdmin(context);
+                                _Login(context);
                               },
                             ),
                           ],
@@ -103,3 +103,4 @@ class LoginOpciones extends StatelessWidget {
     );
   }
 }
+*/

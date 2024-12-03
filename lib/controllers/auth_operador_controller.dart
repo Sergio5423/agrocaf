@@ -1,4 +1,4 @@
-import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
+/*import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
 import 'package:agrocaf/pages/Login/login_operador.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -92,3 +92,4 @@ class AuthOperadorController extends GetxController {
 
   User? get userlogueado => user.value;
 }
+*/

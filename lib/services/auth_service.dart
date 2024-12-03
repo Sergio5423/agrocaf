@@ -1,3 +1,4 @@
+import 'package:agrocaf/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -15,7 +16,7 @@ class FirebaseService {
         email: email,
         password: password,
       );
-      print(userCredential);
+      //print(userCredential);
       User? user = userCredential.user;
 
       // Si el usuario se crea correctamente, guarda los datos en Firestore
@@ -42,6 +43,7 @@ class FirebaseService {
         email: email,
         password: password,
       );
+      print(userCredential.user);
       return userCredential.user;
     } catch (e) {
       print("Error en el inicio de sesión: $e");

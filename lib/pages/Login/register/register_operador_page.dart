@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/auth_operador_controller.dart';
 
@@ -99,3 +99,4 @@ class RegisterOperadorPage extends StatelessWidget {
     );
   }
 }
+*/

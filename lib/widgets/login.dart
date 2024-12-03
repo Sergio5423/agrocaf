@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 
-SafeArea inicioDeSesion(
-    BuildContext context, titulo, _authController, register) {
+SafeArea inicioDeSesion(BuildContext context, _authController, register) {
   return SafeArea(
     child: SingleChildScrollView(
       child: Padding(
@@ -44,14 +43,7 @@ SafeArea inicioDeSesion(
                   ),
               textAlign: TextAlign.center,
             ),
-            Text(
-              titulo,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: const Color.fromRGBO(143, 142, 142, 1),
-                    fontSize: 30,
-                  ),
-              textAlign: TextAlign.center,
-            ),
+
             const SizedBox(height: 40),
             _buildTextField(context, 'Email', _emailController),
             const SizedBox(height: 20),

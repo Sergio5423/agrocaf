@@ -1,4 +1,4 @@
-import 'package:agrocaf/pages/Login/login_opciones.dart';
+/*import 'package:agrocaf/pages/Login/login_opciones.dart';
 import 'package:agrocaf/pages/Login/register/register_operador_page.dart';
 import 'package:agrocaf/widgets/login.dart';
 import 'package:agrocaf/controllers/auth_operador_controller.dart';
@@ -30,4 +30,4 @@ class LoginOperador extends StatelessWidget {
           context, 'Operador', _authController, RegisterOperadorPage()),
     );
   }
-}
+}*/
