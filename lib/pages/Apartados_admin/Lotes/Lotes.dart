@@ -36,7 +36,7 @@ class LotesAdmin extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Info(texto: 'Lotes', cargo: 'Admin'),
+            Info(texto: 'Lotes', cargo: 'Admin', Texto: '',),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(

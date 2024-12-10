@@ -1,25 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Lote {
+class Abono {
   String? id;
-  final String nombre;
+  String abono;
+  String cedularecolector;
 
-  Lote({
+  Abono({
     this.id,
-    this.nombre = '',
+    this.abono = '',
+    this.cedularecolector = '',
   });
 
-  static Lote fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return Lote(
-      id: doc.id,
-      nombre: data['nombre'], // Consistente con toFirestore
+  // Constructor para convertir desde Firestore
+  factory Abono.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return Abono(
+      id: doc.id, // Toma el ID del documento
+      abono: data['abono'] ?? '', // Validación para evitar valores nulos
+      cedularecolector: data['cedularecolector'] ?? '',
     );
   }
 
+  // Método para convertir a Firestore
   Map<String, dynamic> toFirestore() {
     return {
-      'nombre': nombre, // Consistente con fromFirestore
+      'abono': abono,
+      'cedularecolector': cedularecolector,
     };
+  }
+
+  @override
+  String toString() {
+    return 'Abono(Cedula $cedularecolector, Monto $abono)';
   }
 }

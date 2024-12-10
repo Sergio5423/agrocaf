@@ -88,10 +88,10 @@ class BottomNaviAdmin extends StatelessWidget {
           icon: Icon(Icons.attach_money),
           label: 'Kilo',
         ),
-        BottomNavigationBarItem(
+        /*BottomNavigationBarItem(
           icon: Icon(Icons.receipt_long_outlined),
           label: 'Reportes',
-        ),
+        ),*/
         /*BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Configuración',

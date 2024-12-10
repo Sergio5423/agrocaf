@@ -2,7 +2,6 @@ import 'package:agrocaf/models/user_model.dart';
 import 'package:agrocaf/pages/Apartados_Operador/Home_Operador.dart';
 import 'package:agrocaf/pages/Apartados_admin/Home_Administrador.dart';
 import 'package:agrocaf/pages/Login/login.dart';
-import 'package:agrocaf/pages/Login/login_operador.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';

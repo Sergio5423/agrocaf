@@ -48,7 +48,7 @@ class _TemporadasState extends State<Temporadas> {
             children: [
               Info(
                 texto: 'Temporada',
-                cargo: 'Admin',
+                cargo: 'Admin', Texto: 'Temporada',
               ),
               const SizedBox(height: 16),
               // Selector de Mes

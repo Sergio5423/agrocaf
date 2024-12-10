@@ -1,19 +1,21 @@
+import 'package:agrocaf/models/pago_model.dart';
 import 'package:agrocaf/models/recolector_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:agrocaf/models/abono_model.dart';
+import 'package:agrocaf/services/abono_service.dart';
 
-// Adriana
 class RecolectorService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final AbonoService _abonoService = AbonoService();
 
-  // Método para obtener todos los ítems de Firestore
+  // Método para obtener todos los recolectores
   Stream<List<Recolector>> getRecolectores() {
     return _firestore.collection('recolectores').snapshots().map((snapshot) {
-      print(snapshot.docs.length);
       return snapshot.docs.map((doc) => Recolector.fromFirestore(doc)).toList();
     });
   }
 
-  // Método para guardar el ítem en Firestore
+  // Método para guardar un recolector
   Future<void> saveRecolector(Recolector recolector) async {
     try {
       await _firestore
@@ -25,7 +27,7 @@ class RecolectorService {
     }
   }
 
-  // Método para actualizar un ítem existente en Firestore
+  // Método para actualizar un recolector
   Future<void> updateRecolector(Recolector recolector, String ced) async {
     try {
       await _firestore
@@ -37,7 +39,7 @@ class RecolectorService {
     }
   }
 
-  // Método para eliminar un ítem de Firestore por su ID
+  // Método para eliminar un recolector
   Future<void> deleteRecolector(String recolectorId) async {
     try {
       await _firestore.collection('recolectores').doc(recolectorId).delete();
@@ -46,7 +48,7 @@ class RecolectorService {
     }
   }
 
-  // Método para obtener un ítem de Firestore por su ID
+  // Método para obtener un recolector por su cédula
   Future<Recolector?> getRecolector(String recolectorCedula) async {
     try {
       DocumentSnapshot doc = await _firestore
@@ -62,6 +64,29 @@ class RecolectorService {
     } catch (e) {
       print('Error al obtener recolector de Firestore: $e');
       return null;
+    }
+  }
+
+  // Método para agregar un abono a un recolector
+  Future<void> agregarAbono(String cedulaRecolector, String monto) async {
+    try {
+      // Obtén el recolector usando su cédula
+      Recolector? recolector = await getRecolector(cedulaRecolector);
+      if (recolector != null) {
+        Abono nuevoAbono = Abono(
+          id: '',
+          abono: monto,
+          cedularecolector: recolector.cedula,
+        );
+        await _abonoService.agregarAbono(nuevoAbono);
+        // Actualizar totalAbonos en el recolector
+
+        await updateRecolector(recolector, recolector.cedula);
+      } else {
+        print('Recolector no encontrado');
+      }
+    } catch (e) {
+      print('Error al agregar abono: $e');
     }
   }
 }

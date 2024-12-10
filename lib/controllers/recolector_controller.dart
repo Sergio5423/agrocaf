@@ -97,7 +97,7 @@ class RecolectorController extends GetxController {
     } else {
       // Filtrar los ítems según el texto de búsqueda
       filteredRecolectores.value = recolectores.where((recolector) {
-        return recolector.nombre
+        return recolector.cedula
             .toLowerCase()
             .contains(searchQuery.value.toLowerCase());
       }).toList();
@@ -120,7 +120,7 @@ class RecolectorController extends GetxController {
     }
   }
 
-  //Metodo para actualizar datos del recolector por su cedula
+  // Método para actualizar datos del recolector por su cédula
   Future<void> updateRecolectorField(
       String recolectorCedula, String field, dynamic newValue) async {
     try {
@@ -136,15 +136,46 @@ class RecolectorController extends GetxController {
     }
   }
 
+  /*Future<DocumentSnapshot> obtenerDocumentSnapshot(String cedula) async {
+    var recolectorDoc =
+        FirebaseFirestore.instance.collection('recolectores').doc(cedula);
+    DocumentSnapshot doc = await recolectorDoc.get();
+    return doc;
+  }*/
+
+  // Método para agregar un pago al recolector
+  /*Future<void> agregarPago(String cedula, double pago) async {
+    try {
+      // Referencia al recolector basado en la cédula
+      var recolectorDoc = FirebaseFirestore.instance
+          .collection('recolectores')
+          .doc(cedula);
+
+      // Obtener el recolector actual
+      DocumentSnapshot doc = await recolectorDoc.get();
+
+      if (doc.exists) {
+        var recolectorData = doc.data() as Map<String, dynamic>;
+        double currentPago = recolectorData['pago'] ?? 0.0;
+
+        // Actualizar el pago sumando el valor recibido
+        await recolectorDoc.update({'pago': currentPago + pago});
+        Get.snackbar('Éxito', 'Pago agregado correctamente');
+      } else {
+        Get.snackbar('Error', 'Recolector no encontrado');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Ocurrió un error al agregar el pago');
+    }
+  }*/
+
   // Método para generar el archivo Excel
   Future<void> generateExcel() async {
     try {
       // Crear un nuevo libro de Excel
       var excel = Excel.createExcel(); // Obtener la hoja
       Sheet? sheet = excel['Sheet1'];
-      if (sheet == null) {
-        throw StateError('Error: No se pudo crear la hoja de Excel.');
-      } // Agregar encabezados
+
       sheet.appendRow([
         'Cédula',
         'Nombre del Recolector',

@@ -28,9 +28,9 @@ class RegistroPesadaOperador extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Info(
+              const Info(
                 texto: 'Valor del Kilo',
-                cargo: 'Operador',
+                cargo: 'Operador', Texto: '',
               ),
               const SizedBox(height: 20),
               Container(

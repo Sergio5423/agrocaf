@@ -35,6 +35,7 @@ class _PagosState extends State<Principal> {
             Info(
               cargo: 'Operador',
               texto: '',
+              Texto: 'Principal',
             ),
             const SizedBox(
               height: 15,
@@ -132,6 +133,8 @@ class _PagosState extends State<Principal> {
                                                 Text(
                                                     'Recolector: ${item.cedula}'),
                                                 Text('Peso: ${item.peso} kg'),
+                                                Text(
+                                                    'Precio: \$${item.precio}'),
                                                 Text('Lote: ${item.lote}'),
                                                 Text(
                                                     'Fecha: ${item.fecha.toString()}'),

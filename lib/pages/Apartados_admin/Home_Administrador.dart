@@ -40,7 +40,11 @@ class _PagosState extends State<HomeAdmin> {
           child: Column(
             children: [
               // Mostrar el valor de valorKilo de manera reactiva
-              Info(texto: '', cargo: 'Admin'),
+              Info(
+                texto: 'Reportes',
+                cargo: 'Admin',
+                Texto: 'Reportes',
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -210,6 +214,8 @@ class _PagosState extends State<HomeAdmin> {
                                                         'Cédula: ${item.cedula}'),
                                                     Text(
                                                         'Peso: ${item.peso} kg'),
+                                                    Text(
+                                                        'Precio: \$${item.precio}'),
                                                     Text('Lote: ${item.lote}'),
                                                     Text(
                                                         'Fecha: ${item.fecha.toString()}'),

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
+import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/LogoutOperador.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
@@ -12,10 +13,14 @@ import 'package:get/get_core/src/get_main.dart';
 class PesadasOperador extends StatelessWidget {
   final PesadaController pesadaController = Get.put(PesadaController());
   final KiloController kiloController = Get.put(KiloController());
+  final RecolectorController recolectorController =
+      Get.put(RecolectorController());
+
   PesadasOperador({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController buscarReco = TextEditingController();
     pesadaController.fetchPesadas();
     return Scaffold(
       bottomNavigationBar: BottomNaviOperador(),
@@ -29,16 +34,23 @@ class PesadasOperador extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            Info(texto: 'Pesadas', cargo: 'Operador'),
+            Info(
+              texto: 'Pesadas',
+              cargo: 'Operador',
+              Texto: 'Pesadas',
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: buscarReco,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                  labelText: 'Buscar por cédula de recolector',
+                  labelText: 'Buscar por Nombre del recolector Operador',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  recolectorController.updateSearchQuery(value);
+                },
               ),
             ),
             SizedBox(
@@ -77,6 +89,7 @@ class PesadasOperador extends StatelessWidget {
                                               Text(
                                                   'Recolector: ${item.cedula}'),
                                               Text('Peso: ${item.peso} kg'),
+                                              Text('Precio: \$${item.precio}'),
                                               Text('Lote: ${item.lote}'),
                                               Text(
                                                   'Fecha: ${item.fecha.toString()}'),

@@ -63,7 +63,7 @@ class RecolectoresAdmin extends StatelessWidget {
             height: 800,
             child: Column(
               children: [
-                Info(texto: 'Recolectores', cargo: 'Admin'),
+                Info(texto: 'Recolectores', cargo: 'Admin', Texto: '',),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(

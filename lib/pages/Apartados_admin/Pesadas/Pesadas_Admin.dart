@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:agrocaf/controllers/kilo_controller.dart';
 import 'package:agrocaf/controllers/pesadas_controller.dart';
+import 'package:agrocaf/controllers/recolector_controller.dart';
 import 'package:agrocaf/models/kilo_model.dart';
 import 'package:agrocaf/models/pesadas_model.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
@@ -13,6 +14,9 @@ import 'package:get/get_core/src/get_main.dart';
 class PesadasAdmin extends StatelessWidget {
   final PesadaController pesadaController = Get.put(PesadaController());
   final KiloController kiloController = Get.put(KiloController());
+  final RecolectorController recolectorController =
+      Get.put(RecolectorController());
+  TextEditingController buscarRecolectorController = TextEditingController();
   PesadasAdmin({super.key});
 
   @override
@@ -30,16 +34,23 @@ class PesadasAdmin extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            Info(texto: 'Pesadas', cargo: 'Admin'),
+            Info(
+              texto: 'Pesadas',
+              cargo: 'Admin',
+              Texto: '',
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: buscarRecolectorController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
-                  labelText: 'Buscar por cédula de recolector',
+                  labelText: 'Buscar por Nombre de recolector Admin',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  recolectorController.updateSearchQuery(value);
+                },
               ),
             ),
             SizedBox(
@@ -79,6 +90,7 @@ class PesadasAdmin extends StatelessWidget {
                                                   'Recolector: ${item.nombre}'),
                                               Text('Cédula: ${item.cedula}'),
                                               Text('Peso: ${item.peso} kg'),
+                                              Text('Precio: \$${item.precio}'),
                                               Text('Lote: ${item.lote}'),
                                               Text(
                                                   'Fecha: ${item.fecha.toString()}'),

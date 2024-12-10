@@ -54,7 +54,7 @@ class RecolectoresOperador extends StatelessWidget {
             height: 800,
             child: Column(
               children: [
-                Info(texto: 'Recolectores', cargo: 'Operador'),
+                Info(texto: 'Recolectores', cargo: 'Operador', Texto: '',),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(

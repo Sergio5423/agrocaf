@@ -7,7 +7,7 @@ class Info extends StatefulWidget {
   final String cargo; // Añadido: parámetro para el valor del kilo
 
   // Constructor que recibe el valor del kilo
-  const Info({super.key, required this.texto, required this.cargo});
+  const Info({super.key, required this.texto, required this.cargo, required String Texto});
 
   @override
   _InfoState createState() => _InfoState();

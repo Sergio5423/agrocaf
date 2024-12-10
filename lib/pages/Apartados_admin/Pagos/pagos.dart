@@ -1,127 +1,144 @@
-import 'package:agrocaf/controllers/lotes_controller.dart';
-import 'package:agrocaf/models/lotes_model.dart';
+import 'dart:async';
+import 'package:agrocaf/controllers/pagos_controller.dart';
 import 'package:agrocaf/widgets/BottomNav/BottomNavigatorAdmin.dart';
-import 'package:agrocaf/widgets/LogoutAdmin.dart';
 import 'package:agrocaf/widgets/informacion/info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PagosAdmin extends StatelessWidget {
-  // final PagoController pagoController = Get.put(PagoController());
-
+  final PagosController pagosController = Get.put(PagosController());
   PagosAdmin({super.key});
+
+  Future<void> requestPermissions() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    //loteController.fetchLotes();
+    pagosController.fetchPagos();
     return Scaffold(
-        /*floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Lote loteVacio = Lote();
-          Lote? lote = await _showAddLoteDialog(
-              context, loteController, 'Nuevo', loteVacio);
-
-          if (lote != null) {
-            loteController.saveLote(lote);
-          }
-        },
-        backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
       bottomNavigationBar: BottomNaviAdmin(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(76, 140, 43, 1),
-        actions: [LogoutAdmin()],
+        actions: [],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Info(texto: 'Lotes', cargo: 'Admin'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  labelText: 'Buscar por nombre',
-                  border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SafeArea(
+          child: SizedBox(
+            height: 800,
+            child: Column(
+              children: [
+                Info(
+                  texto: 'Pagos',
+                  cargo: 'Admin',
+                  Texto: '',
                 ),
-                onChanged: loteController.updateSearchQuery,
-              ),
-            ),
-            Obx(() {
-              if (loteController.filteredLotes.isEmpty) {
-                return const Center(
-                  child: Text('No hay lotes disponibles.'),
-                );
-              }
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: loteController.filteredLotes.length,
-                  itemBuilder: (context, index) {
-                    final item = loteController.filteredLotes[index];
-                    return Card(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 10.0),
-                        child: ListTile(
-                          title: Text(item.nombre),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.delete_forever),
-                                onPressed: () {
-                                  if (item.id != null) {
-                                    loteController.deleteLote(item.id!);
-                                  }
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      labelText: 'Buscar por nombre',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      pagosController.updateSearchQuery(value);
+                    },
+                  ),
+                ),
+                Obx(() {
+                  return SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount: pagosController.filteredPagos.length,
+                      itemBuilder: (context, index) {
+                        final item = pagosController.filteredPagos[index];
+                        return Card(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 5.0, horizontal: 10.0),
+                          child: ListTile(
+                            title: Text(item.nombRecolector),
+                            subtitle: Text(item.monto.toString()),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Detalles del Recolector'),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                              'Cédula: ${item.cedulaRecolector}'),
+                                          Text(
+                                              'Nombre: ${item.nombRecolector}'),
+                                          Text('Teléfono: ${item.telefono}'),
+                                          Text(
+                                              'Método de Pago: ${item.metodopago}'),
+                                          Text(
+                                              'Número de Cuenta: ${item.ncuenta}'),
+                                          Text('Monto a pagar: ${item.monto}')
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cerrar'),
+                                      ),
+                                    ],
+                                  );
                                 },
-                              ),
-                            ],
+                              );
+                            },
+                            /*trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              
+                            ),*/
                           ),
-                        ));
+                        );
+                      },
+                    ),
+                  );
+                }),
+                /*const SizedBox(
+                  height: 40,
+                ),*/
+                ElevatedButton(
+                  onPressed: () {
+                    pagosController
+                        .generateExcel(); // Llamar al método para generar el Excel
                   },
-                ),
-              );
-            }),
-          ],
-        ),
-      ),*/
-        );
-  }
-
-  /*Future<Lote?> _showAddLoteDialog(BuildContext context,
-      LoteController loteController, String titulo, Lote lote) async {
-    final TextEditingController nombreController =
-        TextEditingController(text: lote.nombre);
-
-    return showDialog<Lote?>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(titulo),
-          content: TextField(
-            controller: nombreController,
-            decoration: const InputDecoration(labelText: 'Nombre'),
+                  child: SizedBox(
+                    width: 180,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.file_download),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        const Text('Descargar Excel'),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        Image.asset('images/excel.png')
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(null),
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                String nombre = nombreController.text.trim();
-                if (nombre.isNotEmpty) {
-                  Navigator.of(context).pop(Lote(nombre: nombre));
-                } else {
-                  Get.snackbar(
-                      'Error', 'Por favor, complete todos los campos.');
-                }
-              },
-              child: Text(titulo),
-            ),
-          ],
-        );
-      },
+        ),
+      ),
     );
-  }*/
+  }
 }
