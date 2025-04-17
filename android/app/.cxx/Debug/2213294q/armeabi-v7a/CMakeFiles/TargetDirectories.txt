@@ -1,0 +1,2 @@
+C:/Users/starr/Documents/github/agrocaf/android/app/.cxx/Debug/2213294q/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/starr/Documents/github/agrocaf/android/app/.cxx/Debug/2213294q/armeabi-v7a/CMakeFiles/rebuild_cache.dir

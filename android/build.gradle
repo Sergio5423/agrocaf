@@ -1,3 +1,7 @@
+buildscript {
+    ext.kotlin_version = '1.9.10' // Actualiza a la última versión disponible
+}
+
 allprojects {
     repositories {
         google()

@@ -76,23 +76,6 @@ class AbonoController extends GetxController {
     }
   }
 
-  /*Future<void> updateAbonoController(Abono abono) async {
-    if (abono.id == null || abono.id!.isEmpty) {
-      Get.snackbar('Error', 'No se puede actualizar un lote sin ID');
-      return;
-    }
-    try {
-      isLoading.value = true;
-      await _abonoService.updateAbono(abono);
-      Get.snackbar('Éxito', 'Lote actualizado correctamente');
-      fetchAbonos();
-    } catch (e) {
-      Get.snackbar('Error', 'Ocurrió un error al actualizar el lote: $e');
-    } finally {
-      isLoading.value = false;
-    }
-  }*/
-
   Future<void> deleteAbonoController(String abonoId) async {
     try {
       isLoading.value = true;
@@ -105,23 +88,4 @@ class AbonoController extends GetxController {
       isLoading.value = false;
     }
   }
-  /*Future<void> agregarBono(String cedula, String abono) async {
-    try {
-      DocumentSnapshot doc =
-          await _recolectorController.obtenerDocumentSnapshot(cedula);
-      if (doc.exists) {
-        //var recolectorData = doc.data() as Map<String, dynamic>;
-        var abonoData = doc.data()
-        String currentBono = recolectorData['bono'] ?? '';
-        var recolectorDoc =
-            FirebaseFirestore.instance.collection('recolectores').doc(cedula);
-        await recolectorDoc.update({'abono': currentBono + abono});
-        Get.snackbar('Éxito', 'Bono agregado correctamente');
-      } else {
-        Get.snackbar('Error', 'Recolector no encontrado');
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'Ocurrió un error al agregar el bono');
-    }
-  }*/
 }

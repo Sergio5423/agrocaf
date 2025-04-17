@@ -14,13 +14,11 @@ class AuthController extends GetxController {
   var isLoading = false.obs; // Observa si se está cargando una operación
   Rxn<User> user = Rxn<User>();
   var cargo0;
-  final storage =
-      GetStorage(); // Crear una instancia de GetStorage para almacenar las credenciales
+  final storage = GetStorage();
 
   @override
   void onInit() {
     super.onInit();
-    //_autoLogin(); // Intentar login automático al iniciar
   }
 
   // Método para registrar el administrador y guardar datos en Firestore

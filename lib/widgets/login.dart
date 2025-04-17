@@ -81,7 +81,7 @@ Center LoginButton(_authController) {
       },
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all<Color>(
-            const Color.fromRGBO(76, 140, 43, 10)),
+            const Color.fromARGB(246, 74, 134, 42)),
         minimumSize: WidgetStateProperty.all(const Size(500, 50)),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(

@@ -108,54 +108,9 @@ class _PagosState extends State<HomeAdmin> {
                                         texto: 'Temporadas'),
                                     SizedBox(width: 16),
                                     Container_Button_State(
-                                        imagen: 'images/pagos.png',
+                                        imagen: 'images/Pagos.png',
                                         texto: 'Pagos',
                                         ruta: '/pagos'),
-                                    /*Container(
-                                      width: 100,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(20)),
-                                              border: Border.all(
-                                                  color: Colors.white),
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(20)),
-                                              child: InkWell(
-                                                child: Column(
-                                                  children: [
-                                                    Image.asset(
-                                                        'images/kilo.png'),
-                                                    const Text('Kilo')
-                                                  ],
-                                                ),
-                                                onTap: () {},
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),*/
                                   ],
                                 ),
                               ),
